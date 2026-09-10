@@ -1,0 +1,829 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Alejandro Zavala Alegría — Estrategia y ejecución</title>
+<meta name="description" content="Alejandro Zavala Alegría (Tahú). 13+ años dirigiendo estrategia y ejecutando resultados en growth, performance marketing e inteligencia comercial." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" />
+<style>
+  /* ============ Tokens — tema oscuro fijo (rust sobre verde petróleo) ============ */
+  :root {
+    color-scheme: dark;
+    --paper:      #0A1618;
+    --surface:    #1A2B2E;
+    --sunken:     #1A2B2E;
+    --ink:        #FFFFFF;
+    --muted:      #B8C4C2;
+    --line:       #2C3F42;
+    --accent:     #C24A1E;
+    --accent-hover: #D65C2C;
+    --accent-ink: #FFFFFF;
+    --data:       #FFB299;
+    --shadow:     0 2px 4px rgba(0,0,0,.35), 0 22px 44px -16px rgba(0,0,0,.6);
+    --shadow-sm:  0 1px 2px rgba(0,0,0,.35), 0 8px 20px -10px rgba(0,0,0,.5);
+
+    --font-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    --font-body:    "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    --font-mono:    "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+    --maxw: 1120px;
+    --gutter: clamp(20px, 5vw, 64px);
+    --nav-h: 64px;
+  }
+
+  /* ============ Base ============ */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+  }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  img, svg { max-width: 100%; display: block; }
+  a { color: inherit; }
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 800; line-height: 1.08; letter-spacing: -0.022em; text-wrap: balance; margin: 0; }
+  p { margin: 0; }
+  :focus-visible { outline: 2.5px solid var(--data); outline-offset: 3px; border-radius: 3px; }
+
+  .wrap { max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  /* ============ Buttons ============ */
+  .btn {
+    --bh: 46px;
+    display: inline-flex; align-items: center; justify-content: center; gap: .5em;
+    min-height: var(--bh); padding: 0 1.25rem;
+    font-family: var(--font-body); font-size: .95rem; font-weight: 600;
+    border-radius: 8px; border: 1px solid transparent;
+    cursor: pointer; text-decoration: none; white-space: nowrap;
+    transition: transform .12s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn--primary { background: var(--accent); color: var(--accent-ink); box-shadow: var(--shadow-sm); }
+  .btn--primary:hover { background: var(--accent-hover); box-shadow: var(--shadow); }
+  .btn--ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+  .btn--ghost:hover { border-color: var(--ink); }
+  .btn--sm { --bh: 38px; padding: 0 .9rem; font-size: .85rem; }
+
+  /* ============ Nav ============ */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    height: var(--nav-h);
+    background: color-mix(in srgb, var(--paper) 86%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav__inner { display: flex; align-items: center; gap: 1.5rem; height: 100%; }
+  .brand { display: flex; align-items: baseline; gap: .55rem; text-decoration: none; }
+  .brand__name { font-family: var(--font-display); font-weight: 700; font-size: 1rem; letter-spacing: -.02em; }
+  .brand__tag {
+    font-family: var(--font-mono); font-size: .66rem; font-weight: 500;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--data);
+    border: 1px solid color-mix(in srgb, var(--data) 40%, transparent);
+    padding: .12em .45em; border-radius: 999px;
+  }
+  .nav__links { display: flex; gap: 1.5rem; margin-left: auto; }
+  .nav__links a { text-decoration: none; font-size: .9rem; color: var(--muted); transition: color .15s ease; }
+  .nav__links a:hover { color: var(--ink); }
+  .nav__actions { display: flex; align-items: center; gap: .75rem; }
+
+  .lang {
+    display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden;
+    font-family: var(--font-mono);
+  }
+  .lang button {
+    appearance: none; border: 0; background: transparent; cursor: pointer;
+    padding: .4rem .6rem; font: inherit; font-size: .78rem; font-weight: 600; color: var(--muted);
+  }
+  .lang button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+
+  /* ============ Hero ============ */
+  .hero { padding-block: clamp(3rem, 8vw, 6rem) clamp(3rem, 7vw, 5.5rem); }
+  .hero__grid {
+    display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+  .hero__eyebrow { margin-bottom: 1.25rem; }
+  .hero h1 { font-size: clamp(2.4rem, 6.2vw, 4rem); }
+  .hero h1 .accent { color: var(--data); }
+  .hero__sub {
+    margin-top: 1.25rem; max-width: 30ch;
+    font-size: clamp(1.05rem, 2vw, 1.2rem); color: var(--muted);
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.75rem; }
+  .chip {
+    font-family: var(--font-mono); font-size: .82rem; font-weight: 500;
+    padding: .38rem .7rem; border-radius: 7px;
+    background: var(--sunken); border: 1px solid var(--line);
+    color: var(--data);
+  }
+  .chip b { font-weight: 600; }
+  .chip .count { font-variant-numeric: tabular-nums; }
+  .hero__cta { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 2rem; }
+
+  /* portrait frame */
+  .hero__media { position: relative; }
+  .frame {
+    position: relative; aspect-ratio: 3 / 4; border-radius: 14px; overflow: hidden;
+    background: linear-gradient(160deg, var(--accent), #0A1618 80%);
+    box-shadow: var(--shadow); border: 1px solid var(--line);
+  }
+  .frame__img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 16%; display: block; }
+  /* degradado sobre la foto: brillo rust arriba-izq. + fundido oscuro hacia la página abajo */
+  .frame::after {
+    content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background:
+      linear-gradient(160deg, color-mix(in srgb, var(--accent) 20%, transparent) 0%, transparent 34%),
+      linear-gradient(180deg, transparent 52%, color-mix(in srgb, var(--paper) 88%, transparent) 100%);
+  }
+  .frame__mark { position: absolute; z-index: 2; width: 18px; height: 18px; border: 2px solid var(--accent); }
+  .frame__mark--tl { top: 12px; left: 12px; border-right: 0; border-bottom: 0; }
+  .frame__mark--tr { top: 12px; right: 12px; border-left: 0; border-bottom: 0; }
+  .frame__mark--bl { bottom: 12px; left: 12px; border-right: 0; border-top: 0; }
+  .frame__mark--br { bottom: 12px; right: 12px; border-left: 0; border-top: 0; }
+  .kpi-float {
+    position: absolute; left: -18px; bottom: 28px;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 11px;
+    padding: .85rem 1rem; box-shadow: var(--shadow); max-width: 15rem;
+    display: flex; flex-direction: column; gap: .1rem;
+  }
+  .kpi-float__num { font-family: var(--font-display); font-weight: 800; font-size: 1.7rem; letter-spacing: -.03em; line-height: 1; }
+  .kpi-float__label { font-family: var(--font-mono); font-size: .72rem; color: var(--muted); letter-spacing: .04em; }
+
+  /* ============ Sections ============ */
+  .section { padding-block: clamp(3.5rem, 8vw, 6rem); border-top: 1px solid var(--line); }
+  .section__head { max-width: 46ch; margin-bottom: clamp(2rem, 4vw, 3rem); }
+  .section__head h2 { font-size: clamp(1.7rem, 3.6vw, 2.4rem); margin-top: .6rem; }
+  .section__head p { margin-top: .9rem; color: var(--muted); }
+  section[id] { scroll-margin-top: calc(var(--nav-h) + 12px); }
+
+  /* Resumen */
+  .facets { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  .facet { background: var(--surface); padding: 1.5rem; }
+  .facet h3 { font-family: var(--font-mono); font-size: .78rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--data); }
+  .facet p { margin-top: .6rem; font-size: .96rem; color: var(--muted); }
+  .lede { font-size: clamp(1.1rem, 2.2vw, 1.35rem); line-height: 1.5; max-width: 40ch; margin-bottom: 2rem; }
+  .lede .mark { color: var(--ink); font-weight: 600; }
+
+  /* Casos */
+  .cases { display: flex; flex-direction: column; gap: 1.25rem; }
+  .case {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+    display: grid; grid-template-columns: 3rem 1fr; gap: 0 1.5rem;
+    transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease, background-color .22s ease;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .cases .case:hover {
+      transform: translateY(-4px);
+      background: color-mix(in srgb, var(--surface) 88%, #FFFFFF);
+      border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+      box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 30%, transparent), 0 20px 40px -14px rgba(0,0,0,.7);
+    }
+  }
+  .case__idx { font-family: var(--font-mono); font-size: .9rem; font-weight: 600; color: var(--muted); padding-top: .3rem; }
+  .case__tag { font-family: var(--font-mono); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--data); }
+  .case__title { font-size: 1.35rem; margin-top: .35rem; }
+  .case__rows { margin-top: 1.25rem; display: grid; gap: .85rem; }
+  .case__row { display: grid; grid-template-columns: 7.5rem 1fr; gap: 1rem; align-items: start; }
+  .case__row dt { font-family: var(--font-mono); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); padding-top: .15rem; }
+  .case__row dd { margin: 0; color: var(--muted); }
+  .case__row--result dd { color: var(--ink); font-weight: 500; }
+  .case__row--result dt { color: var(--data); }
+
+  /* Proceso — funnel */
+  .funnel { display: flex; flex-direction: column; gap: .5rem; }
+  .step { display: grid; grid-template-columns: 2.5rem 1fr; gap: 1.25rem; align-items: start; padding: 1.1rem 0; border-bottom: 1px solid var(--line); }
+  .step:last-child { border-bottom: 0; }
+  .step__n { font-family: var(--font-mono); font-weight: 600; color: var(--data); padding-top: .1rem; }
+  .step__bar { height: 8px; border-radius: 999px; background: linear-gradient(90deg, var(--data), var(--accent)); margin-bottom: .7rem; }
+  .step h3 { font-size: 1.1rem; }
+  .step p { margin-top: .35rem; color: var(--muted); font-size: .96rem; }
+
+  /* Certificaciones */
+  .certs { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+  .cert { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 1.25rem 1.35rem; }
+  .cert h3 { font-size: 1.05rem; }
+  .cert p { margin-top: .4rem; font-family: var(--font-mono); font-size: .8rem; color: var(--muted); line-height: 1.5; }
+
+  /* Contacto */
+  .cta-final {
+    background: linear-gradient(150deg, color-mix(in srgb, var(--accent) 22%, var(--surface)), var(--surface) 62%);
+    border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--line));
+    border-radius: 18px;
+    padding: clamp(2.25rem, 5vw, 3.75rem);
+    display: grid; gap: 1.5rem; text-align: left;
+  }
+  .cta-final h2 { color: var(--ink); font-size: clamp(1.7rem, 4vw, 2.5rem); max-width: 18ch; }
+  .cta-final p { color: var(--muted); max-width: 44ch; }
+  .cta-final .actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+  .cta-final .btn--ghost { color: var(--ink); border-color: color-mix(in srgb, var(--ink) 28%, transparent); }
+  .cta-final .btn--ghost:hover { border-color: var(--ink); }
+
+  /* Footer */
+  .footer { border-top: 1px solid var(--line); padding-block: 2.5rem; }
+  .footer__inner { display: flex; flex-wrap: wrap; gap: .75rem 2rem; justify-content: space-between; font-size: .85rem; color: var(--muted); font-family: var(--font-mono); }
+
+  /* ============ Modal ============ */
+  dialog.modal {
+    width: min(440px, calc(100vw - 32px)); padding: 0; border: 0; border-radius: 16px;
+    background: var(--surface); color: var(--ink); box-shadow: var(--shadow);
+  }
+  dialog.modal::backdrop { background: rgba(12, 14, 20, .55); backdrop-filter: blur(2px); }
+  .modal__body { padding: 1.75rem; }
+  .modal__head { display: flex; justify-content: space-between; align-items: start; gap: 1rem; }
+  .modal__head h2 { font-size: 1.4rem; }
+  .modal__close { appearance: none; border: 1px solid var(--line); background: transparent; color: var(--muted); width: 34px; height: 34px; border-radius: 8px; cursor: pointer; font-size: 1.1rem; line-height: 1; }
+  .modal__close:hover { color: var(--ink); border-color: var(--ink); }
+  .modal p.modal__desc { color: var(--muted); font-size: .95rem; margin-top: .4rem; }
+  .field { display: flex; flex-direction: column; gap: .35rem; margin-top: 1.1rem; }
+  .field label { font-family: var(--font-mono); font-size: .74rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  .field input {
+    font: inherit; padding: .7rem .8rem; border-radius: 9px; border: 1px solid var(--line);
+    background: var(--paper); color: var(--ink);
+  }
+  .field input:focus-visible { border-color: var(--accent); outline-offset: 0; }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .modal form .btn { width: 100%; margin-top: 1.35rem; }
+  .form-msg { margin-top: 1rem; font-size: .9rem; padding: .75rem .85rem; border-radius: 9px; display: none; }
+  .form-msg--ok { display: block; background: color-mix(in srgb, var(--data) 14%, transparent); color: var(--data); border: 1px solid color-mix(in srgb, var(--data) 35%, transparent); }
+  .form-msg--err { display: block; background: color-mix(in srgb, #d64545 12%, transparent); color: #d64545; border: 1px solid color-mix(in srgb, #d64545 35%, transparent); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero__grid > * { animation: rise .55s cubic-bezier(.2,.7,.2,1) both; }
+    .hero__media { animation-delay: .08s; }
+    @keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+    /* Scroll reveal — la clase .reveal solo la añade el JS, así que sin JS todo es visible */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1); }
+    .reveal.in { opacity: 1; transform: none; }
+    .reveal-stagger > * { opacity: 0; transform: translateY(18px); transition: opacity .55s ease, transform .55s cubic-bezier(.2,.7,.2,1); }
+    .reveal-stagger.in > * { opacity: 1; transform: none; }
+    .reveal-stagger.in > *:nth-child(2) { transition-delay: .06s; }
+    .reveal-stagger.in > *:nth-child(3) { transition-delay: .12s; }
+    .reveal-stagger.in > *:nth-child(4) { transition-delay: .18s; }
+    .reveal-stagger.in > *:nth-child(5) { transition-delay: .24s; }
+    .reveal-stagger.in > *:nth-child(6) { transition-delay: .30s; }
+  }
+
+  /* ============ Responsive ============ */
+  @media (max-width: 900px) {
+    .nav__links { display: none; }
+  }
+  @media (max-width: 820px) {
+    .hero__grid { grid-template-columns: 1fr; }
+    .hero__media { order: -1; max-width: 320px; }
+    .kpi-float { left: auto; right: -10px; }
+    .facets { grid-template-columns: 1fr; }
+    .case { grid-template-columns: 1fr; gap: .75rem; }
+    .case__idx { padding-top: 0; }
+    .case__row { grid-template-columns: 1fr; gap: .2rem; }
+  }
+  @media (max-width: 480px) {
+    .brand__tag { display: none; }
+    .nav__inner { gap: .75rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav__inner">
+    <a class="brand" href="#top">
+      <span class="brand__name">Alejandro Zavala Alegría</span>
+      <span class="brand__tag">Tahú</span>
+    </a>
+    <nav class="nav__links" aria-label="Secciones">
+      <a href="#resumen" data-i18n="nav.summary">Resumen</a>
+      <a href="#casos" data-i18n="nav.cases">Casos</a>
+      <a href="#proceso" data-i18n="nav.process">Proceso</a>
+      <a href="#certificaciones" data-i18n="nav.certs">Certificaciones</a>
+      <a href="#contacto" data-i18n="nav.contact">Contacto</a>
+    </nav>
+    <div class="nav__actions">
+      <div class="lang" role="group" aria-label="Idioma / Language">
+        <button type="button" data-lang="es" aria-pressed="true">ES</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <button type="button" class="btn btn--primary btn--sm" data-open-modal data-i18n="nav.cv">Descargar CV</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ Hero ============ -->
+  <section class="hero">
+    <div class="wrap hero__grid">
+      <div class="hero__text">
+        <p class="eyebrow hero__eyebrow" data-i18n="hero.eyebrow">Growth &amp; Performance Marketing · Business Intelligence</p>
+        <h1><span data-i18n="hero.h1a">Dirijo estrategia.</span> <span class="accent" data-i18n="hero.h1b">Ejecuto resultados.</span></h1>
+        <p class="hero__sub" data-i18n="hero.sub">13+ años convirtiendo presupuesto y datos en crecimiento comercial medible.</p>
+        <div class="chips">
+          <span class="chip"><b>ROAS <span class="count" data-to="2.5" data-dec="1">0.0</span>x+</b></span>
+          <span class="chip"><b>−<span class="count" data-to="20">0</span>% CPL</b></span>
+          <span class="chip"><b>+<span class="count" data-to="40">0</span>%</b> <span data-i18n="hero.chip3">tráfico orgánico</span></span>
+        </div>
+        <div class="hero__cta">
+          <button type="button" class="btn btn--primary" data-open-modal data-i18n="hero.cta1">Descargar CV</button>
+          <a class="btn btn--ghost" href="#casos" data-i18n="hero.cta2">Ver resultados</a>
+        </div>
+      </div>
+
+      <figure class="hero__media">
+        <div class="frame">
+          <img class="frame__img" src="foto-tahu.jpg" alt="Alejandro Zavala Alegría, de pie frente a un ventanal de oficina con vista a la ciudad" width="1728" height="2304" />
+          <span class="frame__mark frame__mark--tl"></span>
+          <span class="frame__mark frame__mark--tr"></span>
+          <span class="frame__mark frame__mark--bl"></span>
+          <span class="frame__mark frame__mark--br"></span>
+        </div>
+        <figcaption class="kpi-float">
+          <span class="kpi-float__num">13+</span>
+          <span class="kpi-float__label" data-i18n="hero.badge">años dirigiendo y ejecutando</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ Resumen ejecutivo ============ -->
+  <section class="section" id="resumen">
+    <div class="wrap">
+      <div class="section__head">
+        <p class="eyebrow" data-i18n="sum.kicker">01 — Perfil</p>
+        <h2 data-i18n="sum.h2">Resumen ejecutivo</h2>
+      </div>
+      <p class="lede">
+        <span data-i18n="sum.lede1">13+ años en la intersección de growth y performance marketing con la inteligencia comercial.</span>
+        <span class="mark" data-i18n="sum.lede2">Ejecuto directamente cerca del 50% del trabajo digital de mis equipos</span>
+        <span data-i18n="sum.lede3">—pauta, tracking, automatización— sin soltar la visión de plan anual, KPIs y Business Intelligence.</span>
+      </p>
+      <div class="facets">
+        <div class="facet">
+          <h3 data-i18n="sum.f1t">Estrategia</h3>
+          <p data-i18n="sum.f1d">Plan anual, definición de KPIs y lectura de negocio por trimestre.</p>
+        </div>
+        <div class="facet">
+          <h3 data-i18n="sum.f2t">Ejecución</h3>
+          <p data-i18n="sum.f2d">~50% del trabajo digital operado de mi mano, no delegado y supervisado de lejos.</p>
+        </div>
+        <div class="facet">
+          <h3 data-i18n="sum.f3t">Dato</h3>
+          <p data-i18n="sum.f3d">Business Intelligence como columna vertebral de cada decisión comercial.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Casos ============ -->
+  <section class="section" id="casos">
+    <div class="wrap">
+      <div class="section__head">
+        <p class="eyebrow" data-i18n="cases.kicker">02 — Resultados</p>
+        <h2 data-i18n="cases.h2">Casos</h2>
+        <p data-i18n="cases.intro">Tres proyectos, un mismo patrón: reto → estrategia → resultado. Cifras y clientes anonimizados.</p>
+      </div>
+
+      <div class="cases">
+        <article class="case">
+          <div class="case__idx">01</div>
+          <div>
+            <p class="case__tag" data-i18n="case1.tag">Institución educativa · multi-sede</p>
+            <h3 class="case__title" data-i18n="case1.title">Ecosistema comercial completo</h3>
+            <dl class="case__rows">
+              <div class="case__row"><dt data-i18n="lbl.challenge">Reto</dt><dd data-i18n="case1.challenge">Fricción entre marketing y ventas y procesos no estandarizados entre sedes.</dd></div>
+              <div class="case__row"><dt data-i18n="lbl.strategy">Estrategia</dt><dd data-i18n="case1.strategy">Construcción de infraestructura MarTech —CRM, automatización e IA— integrando tracking y nutrición de leads de punta a punta.</dd></div>
+              <div class="case__row case__row--result"><dt data-i18n="lbl.result">Resultado</dt><dd data-i18n="case1.result">CPL a la baja en un rango de 15–20% y ~20% más leads calificados año contra año.</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="case">
+          <div class="case__idx">02</div>
+          <div>
+            <p class="case__tag" data-i18n="case2.tag">Retail / educación</p>
+            <h3 class="case__title" data-i18n="case2.title">Performance media a escala</h3>
+            <dl class="case__rows">
+              <div class="case__row"><dt data-i18n="lbl.challenge">Reto</dt><dd data-i18n="case2.challenge">Optimizar la inversión en pauta multiplataforma sin perder eficiencia.</dd></div>
+              <div class="case__row"><dt data-i18n="lbl.strategy">Estrategia</dt><dd data-i18n="case2.strategy">Operación y optimización continua en Meta, Google y TikTok Ads, administrando presupuestos de seis cifras mensuales.</dd></div>
+              <div class="case__row case__row--result"><dt data-i18n="lbl.result">Resultado</dt><dd data-i18n="case2.result">ROAS sostenido por encima de 2.5x y mejor eficiencia en el top of funnel.</dd></div>
+            </dl>
+          </div>
+        </article>
+
+        <article class="case">
+          <div class="case__idx">03</div>
+          <div>
+            <p class="case__tag" data-i18n="case3.tag">Consumo / alto valor</p>
+            <h3 class="case__title" data-i18n="case3.title">De la intuición a la decisión con datos</h3>
+            <dl class="case__rows">
+              <div class="case__row"><dt data-i18n="lbl.challenge">Reto</dt><dd data-i18n="case3.challenge">Decisiones comerciales sin visibilidad de KPIs en tiempo real.</dd></div>
+              <div class="case__row"><dt data-i18n="lbl.strategy">Estrategia</dt><dd data-i18n="case3.strategy">Dashboards ejecutivos en Looker Studio (GA4 + GTM) y una estrategia de SEO y contenido basada en el comportamiento del consumidor.</dd></div>
+              <div class="case__row case__row--result"><dt data-i18n="lbl.result">Resultado</dt><dd data-i18n="case3.result">+40% de tráfico orgánico y una base de datos sólida para decisiones estratégicas.</dd></div>
+            </dl>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Proceso ============ -->
+  <section class="section" id="proceso">
+    <div class="wrap">
+      <div class="section__head">
+        <p class="eyebrow" data-i18n="proc.kicker">03 — Método</p>
+        <h2 data-i18n="proc.h2">Proceso estratégico</h2>
+        <p data-i18n="proc.intro">De la visión anual al detalle táctico, sin perder el control del dato en ningún punto del embudo.</p>
+      </div>
+      <div class="funnel">
+        <div class="step">
+          <span class="step__n">01</span>
+          <div>
+            <div class="step__bar" style="width:100%"></div>
+            <h3 data-i18n="proc.s1t">Visión anual</h3>
+            <p data-i18n="proc.s1d">Objetivos de negocio traducidos a un plan de marketing con metas por trimestre.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step__n">02</span>
+          <div>
+            <div class="step__bar" style="width:82%"></div>
+            <h3 data-i18n="proc.s2t">KPIs y medición</h3>
+            <p data-i18n="proc.s2d">Definición de métricas y arquitectura de tracking (GA4, GTM, CRM) y tableros antes de invertir un peso.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step__n">03</span>
+          <div>
+            <div class="step__bar" style="width:64%"></div>
+            <h3 data-i18n="proc.s3t">Ejecución en canal</h3>
+            <p data-i18n="proc.s3d">Pauta, SEO, automatización y contenido operados y optimizados semana a semana.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step__n">04</span>
+          <div>
+            <div class="step__bar" style="width:46%"></div>
+            <h3 data-i18n="proc.s4t">Lectura y ajuste</h3>
+            <p data-i18n="proc.s4d">Revisión de KPIs contra plan, reasignación de presupuesto y nutrición de leads hacia ventas.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Certificaciones ============ -->
+  <section class="section" id="certificaciones">
+    <div class="wrap">
+      <div class="section__head">
+        <p class="eyebrow" data-i18n="cert.kicker">04 — Respaldo</p>
+        <h2 data-i18n="cert.h2">Certificaciones</h2>
+      </div>
+      <div class="certs">
+        <div class="cert"><h3>Google</h3><p>Google Ads · Google Analytics 4</p></div>
+        <div class="cert"><h3>HubSpot</h3><p>CRM · Inbound Marketing</p></div>
+        <div class="cert"><h3>Semrush</h3><p>SEO · Content Marketing</p></div>
+        <div class="cert"><h3>Asana</h3><p>Workflow Specialist</p></div>
+        <div class="cert"><h3 data-i18n="cert.g5t">Inteligencia Artificial</h3><p>Google AI Essentials · Prompt Engineering</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Contacto ============ -->
+  <section class="section" id="contacto">
+    <div class="wrap">
+      <div class="cta-final">
+        <p class="eyebrow" style="color:inherit;opacity:.7" data-i18n="contact.kicker">05 — Contacto</p>
+        <h2 data-i18n="contact.h2">¿Hablamos de tu próximo trimestre?</h2>
+        <p data-i18n="contact.body">Disponible para dirección de marketing, consultoría de growth y proyectos de Business Intelligence.</p>
+        <div class="actions">
+          <a class="btn btn--primary" href="https://wa.me/525518212535?text=Hola%20Alejandro%2C%20vimos%20tu%20CV%20y%20queremos%20platicar%20contigo%20para%20que%20conozcas%20nuestra%20empresa%20y%20la%20vacante." target="_blank" rel="noopener" data-i18n="contact.email">Escríbeme por WhatsApp</a>
+          <a class="btn btn--ghost" href="https://www.linkedin.com/in/holatahu/" target="_blank" rel="noopener">LinkedIn</a>
+          <button type="button" class="btn btn--ghost" data-open-modal data-i18n="contact.cv">Descargar CV</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <span>© 2026 Alejandro Zavala Alegría</span>
+    <span data-i18n="footer.tag">Hecho con datos, no con suposiciones.</span>
+  </div>
+</footer>
+
+<!-- ============ Modal CV ============ -->
+<dialog class="modal" id="cvModal" aria-labelledby="cvModalTitle">
+  <div class="modal__body">
+    <div class="modal__head">
+      <h2 id="cvModalTitle" data-i18n="modal.title">Descargar CV</h2>
+      <button type="button" class="modal__close" data-close-modal aria-label="Cerrar">✕</button>
+    </div>
+    <p class="modal__desc" data-i18n="modal.desc">Déjame tus datos y te envío el CV por correo.</p>
+    <form id="cvForm" novalidate>
+      <div class="field">
+        <label for="cvNombre" data-i18n="modal.name">Nombre</label>
+        <input id="cvNombre" name="nombre" type="text" autocomplete="name" required />
+      </div>
+      <div class="field">
+        <label for="cvCorreo" data-i18n="modal.email">Correo</label>
+        <input id="cvCorreo" name="correo" type="email" autocomplete="email" required />
+      </div>
+      <input class="hp" type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+      <button type="submit" class="btn btn--primary" data-i18n="modal.send">Enviar</button>
+      <p class="form-msg" id="cvMsg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</dialog>
+
+<script>
+(function () {
+  "use strict";
+
+  var ENDPOINT = "https://script.google.com/macros/s/AKfycbzIpsFWa-xj8q6UHbyMOVBoPEK9bzKMLTJGx0a75AeaiVSTMk0HM4_Zf6s9nDLoZPb61g/exec";
+
+  /* ---------- i18n ---------- */
+  var I18N = {
+    es: {
+      "nav.summary": "Resumen", "nav.cases": "Casos", "nav.process": "Proceso",
+      "nav.certs": "Certificaciones", "nav.contact": "Contacto", "nav.cv": "Descargar CV",
+      "hero.eyebrow": "Growth & Performance Marketing · Business Intelligence",
+      "hero.h1a": "Dirijo estrategia.", "hero.h1b": "Ejecuto resultados.",
+      "hero.sub": "13+ años convirtiendo presupuesto y datos en crecimiento comercial medible.",
+      "hero.chip3": "tráfico orgánico",
+      "hero.cta1": "Descargar CV", "hero.cta2": "Ver resultados",
+      "hero.badge": "años dirigiendo y ejecutando",
+      "sum.kicker": "01 — Perfil", "sum.h2": "Resumen ejecutivo",
+      "sum.lede1": "13+ años en la intersección de growth y performance marketing con la inteligencia comercial.",
+      "sum.lede2": "Ejecuto directamente cerca del 50% del trabajo digital de mis equipos",
+      "sum.lede3": "—pauta, tracking, automatización— sin soltar la visión de plan anual, KPIs y Business Intelligence.",
+      "sum.f1t": "Estrategia", "sum.f1d": "Plan anual, definición de KPIs y lectura de negocio por trimestre.",
+      "sum.f2t": "Ejecución", "sum.f2d": "~50% del trabajo digital operado de mi mano, no delegado y supervisado de lejos.",
+      "sum.f3t": "Dato", "sum.f3d": "Business Intelligence como columna vertebral de cada decisión comercial.",
+      "cases.kicker": "02 — Resultados", "cases.h2": "Casos",
+      "cases.intro": "Tres proyectos, un mismo patrón: reto → estrategia → resultado. Cifras y clientes anonimizados.",
+      "lbl.challenge": "Reto", "lbl.strategy": "Estrategia", "lbl.result": "Resultado",
+      "case1.tag": "Institución educativa · multi-sede", "case1.title": "Ecosistema comercial completo",
+      "case1.challenge": "Fricción entre marketing y ventas y procesos no estandarizados entre sedes.",
+      "case1.strategy": "Construcción de infraestructura MarTech —CRM, automatización e IA— integrando tracking y nutrición de leads de punta a punta.",
+      "case1.result": "CPL a la baja en un rango de 15–20% y ~20% más leads calificados año contra año.",
+      "case2.tag": "Retail / educación", "case2.title": "Performance media a escala",
+      "case2.challenge": "Optimizar la inversión en pauta multiplataforma sin perder eficiencia.",
+      "case2.strategy": "Operación y optimización continua en Meta, Google y TikTok Ads, administrando presupuestos de seis cifras mensuales.",
+      "case2.result": "ROAS sostenido por encima de 2.5x y mejor eficiencia en el top of funnel.",
+      "case3.tag": "Consumo / alto valor", "case3.title": "De la intuición a la decisión con datos",
+      "case3.challenge": "Decisiones comerciales sin visibilidad de KPIs en tiempo real.",
+      "case3.strategy": "Dashboards ejecutivos en Looker Studio (GA4 + GTM) y una estrategia de SEO y contenido basada en el comportamiento del consumidor.",
+      "case3.result": "+40% de tráfico orgánico y una base de datos sólida para decisiones estratégicas.",
+      "proc.kicker": "03 — Método", "proc.h2": "Proceso estratégico",
+      "proc.intro": "De la visión anual al detalle táctico, sin perder el control del dato en ningún punto del embudo.",
+      "proc.s1t": "Visión anual", "proc.s1d": "Objetivos de negocio traducidos a un plan de marketing con metas por trimestre.",
+      "proc.s2t": "KPIs y medición", "proc.s2d": "Definición de métricas, arquitectura de tracking (GA4, GTM, CRM) y tableros antes de invertir un peso.",
+      "proc.s3t": "Ejecución en canal", "proc.s3d": "Pauta, SEO, automatización y contenido operados y optimizados semana a semana.",
+      "proc.s4t": "Lectura y ajuste", "proc.s4d": "Revisión de KPIs contra plan, reasignación de presupuesto y nutrición de leads hacia ventas.",
+      "cert.kicker": "04 — Respaldo", "cert.h2": "Certificaciones", "cert.g5t": "Inteligencia Artificial",
+      "contact.kicker": "05 — Contacto", "contact.h2": "¿Hablamos de tu próximo trimestre?",
+      "contact.body": "Disponible para dirección de marketing, consultoría de growth y proyectos de Business Intelligence.",
+      "contact.email": "Escríbeme por WhatsApp", "contact.cv": "Descargar CV",
+      "footer.tag": "Hecho con datos, no con suposiciones.",
+      "modal.title": "Descargar CV", "modal.desc": "Déjame tus datos y te envío el CV por correo.",
+      "modal.name": "Nombre", "modal.email": "Correo", "modal.send": "Enviar",
+      "modal.sending": "Enviando…",
+      "modal.success": "Revisa tu correo, ahí va tu copia.",
+      "modal.error": "Algo falló. Escríbeme por WhatsApp al 55 1821 2535.",
+      "modal.invalid": "Completa tu nombre y un correo válido.",
+      "doc.title": "Alejandro Zavala Alegría — Estrategia y ejecución"
+    },
+    en: {
+      "nav.summary": "Summary", "nav.cases": "Cases", "nav.process": "Process",
+      "nav.certs": "Certifications", "nav.contact": "Contact", "nav.cv": "Download CV",
+      "hero.eyebrow": "Growth & Performance Marketing · Business Intelligence",
+      "hero.h1a": "I lead strategy.", "hero.h1b": "I execute results.",
+      "hero.sub": "13+ years turning budget and data into measurable commercial growth.",
+      "hero.chip3": "organic traffic",
+      "hero.cta1": "Download CV", "hero.cta2": "See results",
+      "hero.badge": "years leading and executing",
+      "sum.kicker": "01 — Profile", "sum.h2": "Executive summary",
+      "sum.lede1": "13+ years at the intersection of growth and performance marketing with commercial intelligence.",
+      "sum.lede2": "I personally run close to 50% of my teams' digital work",
+      "sum.lede3": "— paid media, tracking, automation — without letting go of the annual plan, KPIs and Business Intelligence.",
+      "sum.f1t": "Strategy", "sum.f1d": "Annual plan, KPI definition and quarterly business reading.",
+      "sum.f2t": "Execution", "sum.f2d": "~50% of the digital work done by my own hand, not delegated and watched from afar.",
+      "sum.f3t": "Data", "sum.f3d": "Business Intelligence as the backbone of every commercial decision.",
+      "cases.kicker": "02 — Results", "cases.h2": "Case studies",
+      "cases.intro": "Three projects, one pattern: challenge → strategy → result. Figures and clients anonymized.",
+      "lbl.challenge": "Challenge", "lbl.strategy": "Strategy", "lbl.result": "Result",
+      "case1.tag": "Education institution · multi-campus", "case1.title": "End-to-end commercial ecosystem",
+      "case1.challenge": "Friction between marketing and sales, with non-standardized processes across campuses.",
+      "case1.strategy": "Built the MarTech infrastructure — CRM, automation and AI — wiring tracking and lead nurturing end to end.",
+      "case1.result": "CPL down in the 15–20% range and ~20% more qualified leads year over year.",
+      "case2.tag": "Retail / education", "case2.title": "Performance media at scale",
+      "case2.challenge": "Optimize multi-platform ad spend without losing efficiency.",
+      "case2.strategy": "Continuous operation and optimization across Meta, Google and TikTok Ads, managing six-figure monthly budgets.",
+      "case2.result": "ROAS sustained above 2.5x and improved top-of-funnel efficiency.",
+      "case3.tag": "Consumer / high-value", "case3.title": "From intuition to data-driven decisions",
+      "case3.challenge": "Commercial decisions with no real-time KPI visibility.",
+      "case3.strategy": "Executive dashboards in Looker Studio (GA4 + GTM) plus an SEO and content strategy grounded in consumer behavior.",
+      "case3.result": "+40% organic traffic and a solid data foundation for strategic decisions.",
+      "proc.kicker": "03 — Method", "proc.h2": "Strategic process",
+      "proc.intro": "From annual vision to tactical detail, without losing control of the data at any point in the funnel.",
+      "proc.s1t": "Annual vision", "proc.s1d": "Business goals translated into a marketing plan with quarterly targets.",
+      "proc.s2t": "KPIs & measurement", "proc.s2d": "Metric definition, tracking architecture (GA4, GTM, CRM) and dashboards before any spend.",
+      "proc.s3t": "Channel execution", "proc.s3d": "Paid media, SEO, automation and content run and optimized week to week.",
+      "proc.s4t": "Read & adjust", "proc.s4d": "KPI review against plan, budget reallocation and lead nurturing into sales.",
+      "cert.kicker": "04 — Credentials", "cert.h2": "Certifications", "cert.g5t": "Artificial Intelligence",
+      "contact.kicker": "05 — Contact", "contact.h2": "Let's talk about your next quarter.",
+      "contact.body": "Available for marketing leadership, growth consulting and Business Intelligence projects.",
+      "contact.email": "Message me on WhatsApp", "contact.cv": "Download CV",
+      "footer.tag": "Built on data, not assumptions.",
+      "modal.title": "Download CV", "modal.desc": "Leave your details and I'll email you the CV.",
+      "modal.name": "Name", "modal.email": "Email", "modal.send": "Send",
+      "modal.sending": "Sending…",
+      "modal.success": "Check your inbox — your copy is on its way.",
+      "modal.error": "Something went wrong. Message me on WhatsApp at +52 55 1821 2535.",
+      "modal.invalid": "Enter your name and a valid email.",
+      "doc.title": "Alejandro Zavala Alegría — Strategy & execution"
+    }
+  };
+
+  var lang = "es";
+  try { var saved = localStorage.getItem("azz-lang"); if (saved === "es" || saved === "en") lang = saved; } catch (e) {}
+
+  function applyLang(next) {
+    lang = next;
+    var dict = I18N[lang];
+    document.documentElement.lang = lang;
+    document.title = dict["doc.title"];
+    document.querySelectorAll("[data-i18n]").forEach(function (el) {
+      var key = el.getAttribute("data-i18n");
+      if (dict[key] != null) el.textContent = dict[key];
+    });
+    document.querySelectorAll(".lang button").forEach(function (b) {
+      b.setAttribute("aria-pressed", String(b.dataset.lang === lang));
+    });
+    try { localStorage.setItem("azz-lang", lang); } catch (e) {}
+  }
+
+  document.querySelectorAll(".lang button").forEach(function (b) {
+    b.addEventListener("click", function () { applyLang(b.dataset.lang); });
+  });
+  applyLang(lang);
+
+  /* ---------- Modal ---------- */
+  var modal = document.getElementById("cvModal");
+  var form = document.getElementById("cvForm");
+  var msg = document.getElementById("cvMsg");
+  var lastFocus = null;
+
+  function openModal() {
+    lastFocus = document.activeElement;
+    msg.className = "form-msg";
+    msg.textContent = "";
+    if (typeof modal.showModal === "function") modal.showModal();
+    else modal.setAttribute("open", "");
+    var f = document.getElementById("cvNombre");
+    if (f) f.focus();
+  }
+  function closeModal() {
+    if (typeof modal.close === "function") modal.close();
+    else modal.removeAttribute("open");
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  document.querySelectorAll("[data-open-modal]").forEach(function (b) {
+    b.addEventListener("click", openModal);
+  });
+  document.querySelectorAll("[data-close-modal]").forEach(function (b) {
+    b.addEventListener("click", closeModal);
+  });
+  modal.addEventListener("click", function (e) {
+    var r = modal.getBoundingClientRect();
+    if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) closeModal();
+  });
+  modal.addEventListener("cancel", function (e) { e.preventDefault(); closeModal(); });
+
+  /* ---------- Form submit ---------- */
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var dict = I18N[lang];
+    var nombre = form.nombre.value.trim();
+    var correo = form.correo.value.trim();
+    var valid = nombre.length > 1 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo);
+
+    if (!valid) {
+      msg.className = "form-msg form-msg--err";
+      msg.textContent = dict["modal.invalid"];
+      return;
+    }
+    if (form._hp.value) { // honeypot: silently accept
+      msg.className = "form-msg form-msg--ok";
+      msg.textContent = dict["modal.success"];
+      form.reset();
+      return;
+    }
+
+    var btn = form.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    btn.textContent = dict["modal.sending"];
+
+    var body = new URLSearchParams({ nombre: nombre, correo: correo });
+    fetch(ENDPOINT, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
+      body: body.toString()
+    }).then(function () {
+      msg.className = "form-msg form-msg--ok";
+      msg.textContent = dict["modal.success"];
+      form.reset();
+    }).catch(function () {
+      msg.className = "form-msg form-msg--err";
+      msg.textContent = dict["modal.error"];
+    }).finally(function () {
+      btn.disabled = false;
+      btn.textContent = dict["modal.send"];
+    });
+  });
+
+  /* ---------- Animaciones ---------- */
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var hasIO = "IntersectionObserver" in window;
+
+  // Conteo ascendente en los chips del hero
+  function countUp(el) {
+    var to = parseFloat(el.dataset.to || "0");
+    var dec = parseInt(el.dataset.dec || "0", 10);
+    if (reduceMotion) { el.textContent = to.toFixed(dec); return; }
+    var start = null, dur = 1200;
+    function frame(t) {
+      if (start === null) start = t;
+      var p = Math.min((t - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = (to * eased).toFixed(dec);
+      if (p < 1) requestAnimationFrame(frame);
+      else el.textContent = to.toFixed(dec);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  var counts = Array.prototype.slice.call(document.querySelectorAll(".chip .count"));
+  if (counts.length) {
+    if (!hasIO) {
+      counts.forEach(countUp);
+    } else {
+      var chipObs = new IntersectionObserver(function (entries, obs) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { countUp(en.target); obs.unobserve(en.target); }
+        });
+      }, { threshold: 0.6 });
+      counts.forEach(function (c) { chipObs.observe(c); });
+    }
+  }
+
+  // Reveal al hacer scroll (fade + slide up)
+  if (!reduceMotion && hasIO) {
+    var revealEls = Array.prototype.slice.call(
+      document.querySelectorAll(".section__head, .lede, .cases .case, .cta-final")
+    );
+    var staggerEls = Array.prototype.slice.call(
+      document.querySelectorAll(".facets, .funnel, .certs")
+    );
+    revealEls.forEach(function (el) { el.classList.add("reveal"); });
+    staggerEls.forEach(function (el) { el.classList.add("reveal-stagger"); });
+
+    var all = revealEls.concat(staggerEls);
+    var revObs = new IntersectionObserver(function (entries, obs) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add("in"); obs.unobserve(en.target); }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
+    all.forEach(function (el) { revObs.observe(el); });
+
+    // Seguro: si algún observer no dispara, mostrar todo tras 1.6s
+    setTimeout(function () { all.forEach(function (el) { el.classList.add("in"); }); }, 1600);
+  }
+})();
+</script>
+</body>
+</html>
