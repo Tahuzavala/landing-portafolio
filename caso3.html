@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Caso 03 — De la intuición a la decisión con datos · Alejandro Zavala Alegría</title>
+<meta name="description" content="Caso anonimizado: dashboards ejecutivos en Looker Studio (GA4 + GTM) y estrategia SEO basada en comportamiento del consumidor. +40% de tráfico orgánico." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" />
+<style>
+  :root {
+    color-scheme: dark;
+    --paper:      #0A1618;
+    --surface:    #1A2B2E;
+    --sunken:     #1A2B2E;
+    --ink:        #FFFFFF;
+    --muted:      #B8C4C2;
+    --line:       #2C3F42;
+    --accent:     #C24A1E;
+    --accent-hover: #D65C2C;
+    --accent-ink: #FFFFFF;
+    --data:       #FFB299;
+    --shadow:     0 2px 4px rgba(0,0,0,.35), 0 22px 44px -16px rgba(0,0,0,.6);
+    --shadow-sm:  0 1px 2px rgba(0,0,0,.35), 0 8px 20px -10px rgba(0,0,0,.5);
+    --font-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    --font-body:    "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    --font-mono:    "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --maxw: 1120px;
+    --gutter: clamp(20px, 5vw, 64px);
+    --nav-h: 64px;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: var(--font-body); font-size: 1.0625rem; line-height: 1.6;
+    -webkit-font-smoothing: antialiased; overflow-x: hidden;
+  }
+  img, svg { max-width: 100%; display: block; }
+  a { color: inherit; }
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 800; line-height: 1.08; letter-spacing: -0.022em; text-wrap: balance; margin: 0; }
+  p { margin: 0; }
+  :focus-visible { outline: 2.5px solid var(--data); outline-offset: 3px; border-radius: 3px; }
+
+  .wrap { max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
+  .eyebrow {
+    font-family: var(--font-mono); font-size: .72rem; font-weight: 600;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin: 0;
+  }
+
+  .btn {
+    --bh: 46px;
+    display: inline-flex; align-items: center; justify-content: center; gap: .5em;
+    min-height: var(--bh); padding: 0 1.25rem;
+    font-family: var(--font-body); font-size: .95rem; font-weight: 600;
+    border-radius: 8px; border: 1px solid transparent;
+    cursor: pointer; text-decoration: none; white-space: nowrap;
+    transition: transform .12s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn--primary { background: var(--accent); color: var(--accent-ink); box-shadow: var(--shadow-sm); }
+  .btn--primary:hover { background: var(--accent-hover); box-shadow: var(--shadow); }
+  .btn--ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+  .btn--ghost:hover { border-color: var(--ink); }
+  .btn--sm { --bh: 38px; padding: 0 .9rem; font-size: .85rem; }
+
+  .nav {
+    position: sticky; top: 0; z-index: 50; height: var(--nav-h);
+    background: color-mix(in srgb, var(--paper) 86%, transparent);
+    backdrop-filter: blur(10px); border-bottom: 1px solid var(--line);
+  }
+  .nav__inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; height: 100%; }
+  .brand { display: flex; align-items: baseline; gap: .55rem; text-decoration: none; }
+  .brand__name { font-family: var(--font-display); font-weight: 700; font-size: 1rem; letter-spacing: -.02em; }
+  .brand__tag {
+    font-family: var(--font-mono); font-size: .66rem; font-weight: 500;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--data);
+    border: 1px solid color-mix(in srgb, var(--data) 40%, transparent);
+    padding: .12em .45em; border-radius: 999px;
+  }
+
+  .case-head { padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(1.5rem, 4vw, 2.5rem); }
+  .case-head__tag { font-family: var(--font-mono); font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--data); margin-top: 1rem; }
+  .case-head h1 { font-size: clamp(2rem, 5vw, 3.1rem); margin-top: .8rem; max-width: 22ch; }
+
+  .summary { margin-top: 2.25rem; display: grid; gap: 1rem; max-width: 62ch; }
+  .summary__row { display: grid; grid-template-columns: 8rem 1fr; gap: 1.25rem; align-items: start; }
+  .summary__row dt { font-family: var(--font-mono); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); padding-top: .15rem; }
+  .summary__row dd { margin: 0; color: var(--muted); }
+  .summary__row--result dt { color: var(--data); }
+  .summary__row--result dd { color: var(--ink); font-weight: 500; }
+
+  .section { padding-block: clamp(3rem, 7vw, 5rem); border-top: 1px solid var(--line); }
+  .section__head { max-width: 52ch; margin-bottom: clamp(1.75rem, 4vw, 2.5rem); }
+  .section__head h2 { font-size: clamp(1.6rem, 3.4vw, 2.2rem); margin-top: .6rem; }
+  .section__head p { margin-top: .8rem; color: var(--muted); font-size: .96rem; }
+
+  .evidence { display: grid; gap: 1.5rem; }
+  .chart-card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: clamp(1.25rem, 3vw, 2rem); }
+  .chart-card h3 { font-size: 1.05rem; }
+  .chart-card .cc-note { margin-top: .45rem; font-family: var(--font-mono); font-size: .74rem; color: var(--muted); line-height: 1.55; }
+  .chart-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; margin-top: 1.4rem; }
+  .chart-wrap { margin-top: 1.25rem; }
+
+  .cx-grid { stroke: var(--line); stroke-width: 1; }
+  .cx-axis { stroke: var(--line); stroke-width: 1.5; }
+  .cx-label { fill: var(--muted); font: 600 11px var(--font-mono); }
+  .cx-val { fill: var(--ink); font: 700 13px var(--font-display); }
+  .cx-cap { fill: var(--data); font: 600 12px var(--font-mono); }
+
+  .bar { transform-box: fill-box; transform-origin: bottom; }
+  .bar--before { fill: color-mix(in srgb, var(--muted) 42%, transparent); }
+  .bar--after { fill: var(--accent); }
+  .ln-area { fill: color-mix(in srgb, var(--data) 15%, transparent); }
+  .ln-path { fill: none; stroke: var(--data); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+  .ln-dot { fill: var(--accent); stroke: var(--paper); stroke-width: 1.5; }
+  @media (prefers-reduced-motion: no-preference) {
+    .bar { animation: grow 1s cubic-bezier(.2,.7,.2,1) both; }
+    .bar--after { animation-delay: .12s; }
+    @keyframes grow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+    .ln-path { stroke-dasharray: 1200; stroke-dashoffset: 1200; animation: draw 1.5s ease forwards .1s; }
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+  }
+
+  /* Dashboard mockup */
+  .dash { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--surface); box-shadow: var(--shadow-sm); }
+  .dash__bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding: .85rem 1.1rem; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 45%, var(--surface)); }
+  .dash__title { font-family: var(--font-mono); font-size: .78rem; color: var(--muted); }
+  .dash__title b { color: var(--ink); font-weight: 600; }
+  .dash__chip { font-family: var(--font-mono); font-size: .7rem; color: var(--data); border: 1px solid color-mix(in srgb, var(--data) 40%, transparent); border-radius: 999px; padding: .2em .7em; }
+  .dash__body { padding: clamp(1rem, 3vw, 1.5rem); display: grid; gap: 1.25rem; background: color-mix(in srgb, var(--paper) 55%, var(--surface)); }
+  .scorecards { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .scorecard { background: var(--surface); padding: 1rem 1.1rem; }
+  .scorecard .sc-num { font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; letter-spacing: -.03em; line-height: 1.05; }
+  .scorecard .sc-lbl { font-family: var(--font-mono); font-size: .72rem; color: var(--muted); margin-top: .3rem; }
+  .scorecard .sc-sub { font-family: var(--font-mono); font-size: .68rem; color: var(--data); margin-top: .2rem; }
+
+  .vis { display: grid; gap: .55rem; }
+  .vis__row { display: flex; align-items: center; gap: .75rem; font-family: var(--font-mono); font-size: .85rem; padding: .65rem .8rem; border: 1px solid var(--line); border-radius: 9px; background: var(--paper); color: var(--muted); }
+  .vis__mark { width: 22px; height: 22px; border-radius: 6px; display: grid; place-items: center; font-weight: 700; flex: none; }
+  .vis__mark--no { background: color-mix(in srgb, var(--muted) 22%, transparent); color: var(--muted); }
+  .vis__mark--yes { background: var(--accent); color: #fff; }
+
+  .footer { border-top: 1px solid var(--line); padding-block: 2.5rem; margin-top: 1rem; }
+  .footer__inner { display: flex; flex-wrap: wrap; gap: .75rem 2rem; justify-content: space-between; font-size: .85rem; color: var(--muted); font-family: var(--font-mono); }
+
+  @media (max-width: 620px) {
+    .summary__row { grid-template-columns: 1fr; gap: .2rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav__inner">
+    <a class="brand" href="index.html">
+      <span class="brand__name">Alejandro Zavala Alegría</span>
+      <span class="brand__tag">Tahú</span>
+    </a>
+    <a class="btn btn--ghost btn--sm" href="index.html#casos">&larr;&nbsp;Volver</a>
+  </div>
+</header>
+
+<main>
+  <section class="wrap case-head">
+    <p class="eyebrow">Caso 03 — Resultados</p>
+    <p class="case-head__tag">Consumo / alto valor</p>
+    <h1>De la intuición a la decisión con datos</h1>
+    <dl class="summary">
+      <div class="summary__row"><dt>Reto</dt><dd>Decisiones comerciales sin visibilidad de KPIs en tiempo real.</dd></div>
+      <div class="summary__row"><dt>Estrategia</dt><dd>Dashboards ejecutivos en Looker Studio (GA4 + GTM) y una estrategia de SEO y contenido basada en el comportamiento del consumidor.</dd></div>
+      <div class="summary__row summary__row--result"><dt>Resultado</dt><dd>+40% de tráfico orgánico y una base de datos sólida para decisiones estratégicas.</dd></div>
+    </dl>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section__head">
+        <p class="eyebrow">Evidencia</p>
+        <h2>El resultado, en gráfica</h2>
+        <p>Datos anonimizados y expresados como índice (base 100 = periodo de partida). La trayectoria por trimestre es una representación esquemática de la variación total reportada (+40%); no refleja cifras exactas del cliente.</p>
+      </div>
+
+      <div class="evidence">
+        <div class="chart-grid">
+          <div class="chart-card">
+            <h3>Tráfico orgánico</h3>
+            <p class="cc-note">Índice base 100 · periodo base vs. cierre</p>
+            <div class="chart-wrap">
+              <svg viewBox="0 0 340 250" role="img" aria-label="Barras: tráfico orgánico sube de 100 a 140, un aumento del 40 por ciento.">
+                <line class="cx-grid" x1="40" y1="148.3" x2="320" y2="148.3" />
+                <line class="cx-grid" x1="40" y1="86.7"  x2="320" y2="86.7" />
+                <line class="cx-axis" x1="40" y1="210"   x2="320" y2="210" />
+                <text class="cx-label" x="34" y="213" text-anchor="end">0</text>
+                <text class="cx-label" x="34" y="152" text-anchor="end">50</text>
+                <text class="cx-label" x="34" y="90"  text-anchor="end">100</text>
+
+                <rect class="bar bar--before" x="73"  y="86.7" width="74" height="123.3" rx="3" />
+                <rect class="bar bar--after"  x="198" y="37.3" width="74" height="172.7" rx="3" />
+
+                <text class="cx-val" x="110" y="78"  text-anchor="middle">100</text>
+                <text class="cx-val" x="235" y="29"  text-anchor="middle">140</text>
+                <text class="cx-label" x="110" y="228" text-anchor="middle">Periodo base</text>
+                <text class="cx-label" x="235" y="228" text-anchor="middle">Cierre</text>
+                <text class="cx-cap" x="180" y="245" text-anchor="middle">+40 % de tráfico orgánico</text>
+              </svg>
+            </div>
+          </div>
+
+          <div class="chart-card">
+            <h3>Trayectoria por trimestre</h3>
+            <p class="cc-note">Representación esquemática · índice base 100 → 140</p>
+            <div class="chart-wrap">
+              <svg viewBox="0 0 520 240" role="img" aria-label="Línea ascendente del tráfico orgánico indexado, de 100 en el trimestre inicial a 140 en el cuarto.">
+                <line class="cx-grid" x1="44" y1="171.7" x2="500" y2="171.7" />
+                <line class="cx-grid" x1="44" y1="86.7"  x2="500" y2="86.7" />
+                <line class="cx-axis" x1="44" y1="200"   x2="500" y2="200" />
+                <text class="cx-label" x="40" y="175" text-anchor="end">100</text>
+                <text class="cx-label" x="40" y="90"  text-anchor="end">130</text>
+
+                <polygon class="ln-area" points="60,171.7 165,143.3 270,109.3 375,81 480,58.3 480,200 60,200" />
+                <polyline class="ln-path" points="60,171.7 165,143.3 270,109.3 375,81 480,58.3" />
+                <circle class="ln-dot" cx="60"  cy="171.7" r="3.4" />
+                <circle class="ln-dot" cx="165" cy="143.3" r="3.4" />
+                <circle class="ln-dot" cx="270" cy="109.3" r="3.4" />
+                <circle class="ln-dot" cx="375" cy="81"    r="3.4" />
+                <circle class="ln-dot" cx="480" cy="58.3"  r="3.4" />
+
+                <text class="cx-val" x="60"  y="188" text-anchor="middle">100</text>
+                <text class="cx-val" x="480" y="50"  text-anchor="middle">140</text>
+                <text class="cx-label" x="60"  y="218" text-anchor="middle">T inicial</text>
+                <text class="cx-label" x="270" y="218" text-anchor="middle">T intermedio</text>
+                <text class="cx-label" x="480" y="218" text-anchor="middle">T de cierre</text>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="dash">
+          <div class="dash__bar">
+            <span class="dash__title"><b>Dashboard ejecutivo</b> · GA4 + GTM &rarr; Looker Studio</span>
+            <span class="dash__chip">Datos anonimizados</span>
+          </div>
+          <div class="dash__body">
+            <div class="scorecards">
+              <div class="scorecard">
+                <div class="sc-num">+40%</div>
+                <div class="sc-lbl">Tráfico orgánico</div>
+                <div class="sc-sub">vs. periodo base</div>
+              </div>
+              <div class="scorecard">
+                <div class="sc-num">Tiempo real</div>
+                <div class="sc-lbl">Visibilidad de KPIs</div>
+                <div class="sc-sub">antes: sin visibilidad</div>
+              </div>
+              <div class="scorecard">
+                <div class="sc-num">GA4 · GTM</div>
+                <div class="sc-lbl">Fuentes conectadas</div>
+                <div class="sc-sub">modelo unificado en Looker</div>
+              </div>
+              <div class="scorecard">
+                <div class="sc-num">SEO</div>
+                <div class="sc-lbl">Estrategia de contenido</div>
+                <div class="sc-sub">basada en comportamiento</div>
+              </div>
+            </div>
+
+            <div class="chart-card" style="border-radius:12px;">
+              <h3>Visibilidad de KPIs: antes y después</h3>
+              <p class="cc-note">El cambio cualitativo que habilitó las decisiones estratégicas.</p>
+              <div class="vis">
+                <div class="vis__row"><span class="vis__mark vis__mark--no">✕</span> Antes — reportes manuales, sin KPIs en tiempo real</div>
+                <div class="vis__row"><span class="vis__mark vis__mark--yes">✓</span> Después — tablero único en Looker Studio, KPIs en vivo</div>
+                <div class="vis__row"><span class="vis__mark vis__mark--yes">✓</span> Después — base de datos sólida para decisiones estratégicas</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p style="margin-top:2rem;">
+        <a class="btn btn--primary" href="index.html#casos">&larr;&nbsp;Volver a los casos</a>
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <span>© 2026 Alejandro Zavala Alegría</span>
+    <span>Cifras y clientes anonimizados.</span>
+  </div>
+</footer>
+
+</body>
+</html>

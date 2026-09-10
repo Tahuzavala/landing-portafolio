@@ -201,6 +201,12 @@
       box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 30%, transparent), 0 20px 40px -14px rgba(0,0,0,.7);
     }
   }
+  .case { text-decoration: none; color: inherit; }
+  .case__cta { grid-column: 2; margin-top: 1.2rem; font-family: var(--font-mono); font-size: .74rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--data); display: inline-flex; align-items: center; gap: .45rem; }
+  .case__cta::after { content: "\2192"; transition: transform .2s ease; }
+  @media (prefers-reduced-motion: no-preference) {
+    .cases .case:hover .case__cta::after { transform: translateX(4px); }
+  }
   .case__idx { font-family: var(--font-mono); font-size: .9rem; font-weight: 600; color: var(--muted); padding-top: .3rem; }
   .case__tag { font-family: var(--font-mono); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--data); }
   .case__title { font-size: 1.35rem; margin-top: .35rem; }
@@ -219,6 +225,24 @@
   .step__bar { height: 8px; border-radius: 999px; background: linear-gradient(90deg, var(--data), var(--accent)); margin-bottom: .7rem; }
   .step h3 { font-size: 1.1rem; }
   .step p { margin-top: .35rem; color: var(--muted); font-size: .96rem; }
+  .step__head { display: flex; align-items: center; gap: .55rem; }
+  .step__toggle {
+    appearance: none; flex: none; width: 28px; height: 28px;
+    border: 1px solid var(--line); border-radius: 7px; background: transparent;
+    color: var(--muted); display: inline-grid; place-items: center; cursor: pointer;
+    transition: color .15s ease, border-color .15s ease, background-color .15s ease;
+  }
+  .step__toggle:hover { color: var(--ink); border-color: var(--ink); }
+  .step__toggle[aria-expanded="true"] { color: var(--data); border-color: color-mix(in srgb, var(--data) 45%, var(--line)); }
+  .step__chev { width: 14px; height: 14px; transition: transform .2s ease; }
+  .step__toggle[aria-expanded="true"] .step__chev { transform: rotate(180deg); }
+  .step__detail { margin-top: .75rem; padding-left: .95rem; border-left: 2px solid color-mix(in srgb, var(--data) 40%, var(--line)); }
+  .step__detail p { margin-top: 0; font-size: .95rem; max-width: 62ch; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+  @media (prefers-reduced-motion: no-preference) {
+    .step__detail:not([hidden]) { animation: stepIn .25s ease; }
+    @keyframes stepIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+  }
 
   /* Certificaciones */
   .certs { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
@@ -253,7 +277,7 @@
   .modal__body { padding: 1.75rem; }
   .modal__head { display: flex; justify-content: space-between; align-items: start; gap: 1rem; }
   .modal__head h2 { font-size: 1.4rem; }
-  .modal__close { appearance: none; border: 1px solid var(--line); background: transparent; color: var(--muted); width: 34px; height: 34px; border-radius: 8px; cursor: pointer; font-size: 1.1rem; line-height: 1; }
+  .modal__close { appearance: none; margin-inline-start: auto; border: 1px solid var(--line); background: transparent; color: var(--muted); width: 34px; height: 34px; border-radius: 8px; cursor: pointer; font-size: 1.1rem; line-height: 1; }
   .modal__close:hover { color: var(--ink); border-color: var(--ink); }
   .modal p.modal__desc { color: var(--muted); font-size: .95rem; margin-top: .4rem; }
   .field { display: flex; flex-direction: column; gap: .35rem; margin-top: 1.1rem; }
@@ -263,8 +287,21 @@
     background: var(--paper); color: var(--ink);
   }
   .field input:focus-visible { border-color: var(--accent); outline-offset: 0; }
-  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .hp { position: absolute; left: -9999px; top: -9999px; width: 1px; height: 1px; overflow: hidden; opacity: 0; pointer-events: none; }
   .modal form .btn { width: 100%; margin-top: 1.35rem; }
+  .modal__thanks { text-align: center; padding: .25rem 0 .5rem; }
+  .modal__thanks:focus-visible { outline: none; }
+  .modal__thanks-badge {
+    width: 56px; height: 56px; margin: 0 auto 1.1rem;
+    border-radius: 50%; display: grid; place-items: center;
+    font-size: 1.55rem; font-weight: 700;
+    color: var(--data);
+    background: color-mix(in srgb, var(--data) 15%, transparent);
+    border: 1px solid color-mix(in srgb, var(--data) 35%, transparent);
+  }
+  .modal__thanks h2 { font-size: 1.5rem; }
+  .modal__thanks p { color: var(--muted); font-size: .98rem; margin-top: .55rem; }
+  .modal__thanks .btn { width: 100%; margin-top: 1.6rem; }
   .form-msg { margin-top: 1rem; font-size: .9rem; padding: .75rem .85rem; border-radius: 9px; display: none; }
   .form-msg--ok { display: block; background: color-mix(in srgb, var(--data) 14%, transparent); color: var(--data); border: 1px solid color-mix(in srgb, var(--data) 35%, transparent); }
   .form-msg--err { display: block; background: color-mix(in srgb, #d64545 12%, transparent); color: #d64545; border: 1px solid color-mix(in srgb, #d64545 35%, transparent); }
@@ -298,6 +335,7 @@
     .case { grid-template-columns: 1fr; gap: .75rem; }
     .case__idx { padding-top: 0; }
     .case__row { grid-template-columns: 1fr; gap: .2rem; }
+    .case__cta { grid-column: 1; }
   }
   @media (max-width: 480px) {
     .brand__tag { display: none; }
@@ -405,7 +443,7 @@
       </div>
 
       <div class="cases">
-        <article class="case">
+        <a class="case" href="caso1.html">
           <div class="case__idx">01</div>
           <div>
             <p class="case__tag" data-i18n="case1.tag">Institución educativa · multi-sede</p>
@@ -416,9 +454,10 @@
               <div class="case__row case__row--result"><dt data-i18n="lbl.result">Resultado</dt><dd data-i18n="case1.result">CPL a la baja en un rango de 15–20% y ~20% más leads calificados año contra año.</dd></div>
             </dl>
           </div>
-        </article>
+          <span class="case__cta" data-i18n="cases.viewcase">Ver caso y evidencia</span>
+        </a>
 
-        <article class="case">
+        <a class="case" href="caso2.html">
           <div class="case__idx">02</div>
           <div>
             <p class="case__tag" data-i18n="case2.tag">Retail / educación</p>
@@ -429,9 +468,10 @@
               <div class="case__row case__row--result"><dt data-i18n="lbl.result">Resultado</dt><dd data-i18n="case2.result">ROAS sostenido por encima de 2.5x y mejor eficiencia en el top of funnel.</dd></div>
             </dl>
           </div>
-        </article>
+          <span class="case__cta" data-i18n="cases.viewcase">Ver caso y evidencia</span>
+        </a>
 
-        <article class="case">
+        <a class="case" href="caso3.html">
           <div class="case__idx">03</div>
           <div>
             <p class="case__tag" data-i18n="case3.tag">Consumo / alto valor</p>
@@ -442,7 +482,8 @@
               <div class="case__row case__row--result"><dt data-i18n="lbl.result">Resultado</dt><dd data-i18n="case3.result">+40% de tráfico orgánico y una base de datos sólida para decisiones estratégicas.</dd></div>
             </dl>
           </div>
-        </article>
+          <span class="case__cta" data-i18n="cases.viewcase">Ver caso y evidencia</span>
+        </a>
       </div>
     </div>
   </section>
@@ -460,32 +501,68 @@
           <span class="step__n">01</span>
           <div>
             <div class="step__bar" style="width:100%"></div>
-            <h3 data-i18n="proc.s1t">Visión anual</h3>
+            <div class="step__head">
+              <h3 data-i18n="proc.s1t">Visión anual</h3>
+              <button type="button" class="step__toggle" aria-expanded="false" aria-controls="procP1">
+                <svg class="step__chev" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="sr-only" data-i18n="proc.toggle">Mostrar detalle</span>
+              </button>
+            </div>
             <p data-i18n="proc.s1d">Objetivos de negocio traducidos a un plan de marketing con metas por trimestre.</p>
+            <div class="step__detail" id="procP1" hidden>
+              <p data-i18n="proc.s1x">Toda estrategia comercial parte de traducir un objetivo de negocio en metas de marketing medibles, no al revés. Antes de definir tácticas, alineo el plan anual con el ciclo comercial de la organización: estacionalidad, capacidad instalada y objetivos de ingreso por trimestre. Esto evita el error más común en dirección de marketing — construir campañas antes de tener claridad sobre qué resultado de negocio están sosteniendo.</p>
+            </div>
           </div>
         </div>
         <div class="step">
           <span class="step__n">02</span>
           <div>
             <div class="step__bar" style="width:82%"></div>
-            <h3 data-i18n="proc.s2t">KPIs y medición</h3>
+            <div class="step__head">
+              <h3 data-i18n="proc.s2t">KPIs y medición</h3>
+              <button type="button" class="step__toggle" aria-expanded="false" aria-controls="procP2">
+                <svg class="step__chev" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="sr-only" data-i18n="proc.toggle">Mostrar detalle</span>
+              </button>
+            </div>
             <p data-i18n="proc.s2d">Definición de métricas y arquitectura de tracking (GA4, GTM, CRM) y tableros antes de invertir un peso.</p>
+            <div class="step__detail" id="procP2" hidden>
+              <p data-i18n="proc.s2x">Ninguna inversión se aprueba sin arquitectura de medición lista. Defino la jerarquía de métricas (negocio → marketing → canal) y construyo la infraestructura de tracking —GA4, GTM, CRM— antes de que se ejecute el primer peso de pauta. Esto convierte cada decisión posterior en una decisión basada en inteligencia comercial real, no en supuestos ni en el desempeño aislado de un canal.</p>
+            </div>
           </div>
         </div>
         <div class="step">
           <span class="step__n">03</span>
           <div>
             <div class="step__bar" style="width:64%"></div>
-            <h3 data-i18n="proc.s3t">Ejecución en canal</h3>
+            <div class="step__head">
+              <h3 data-i18n="proc.s3t">Ejecución en canal</h3>
+              <button type="button" class="step__toggle" aria-expanded="false" aria-controls="procP3">
+                <svg class="step__chev" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="sr-only" data-i18n="proc.toggle">Mostrar detalle</span>
+              </button>
+            </div>
             <p data-i18n="proc.s3d">Pauta, SEO, automatización y contenido operados y optimizados semana a semana.</p>
+            <div class="step__detail" id="procP3" hidden>
+              <p data-i18n="proc.s3x">La ejecución multicanal (pauta, SEO, automatización, contenido) se opera bajo un mismo estándar de gobernanza: mismos objetivos, mismas ventanas de optimización, mismo criterio de asignación de presupuesto. Esto es lo que permite escalar sin perder eficiencia — cada canal compite por presupuesto según su contribución real al embudo, no por inercia histórica.</p>
+            </div>
           </div>
         </div>
         <div class="step">
           <span class="step__n">04</span>
           <div>
             <div class="step__bar" style="width:46%"></div>
-            <h3 data-i18n="proc.s4t">Lectura y ajuste</h3>
+            <div class="step__head">
+              <h3 data-i18n="proc.s4t">Lectura y ajuste</h3>
+              <button type="button" class="step__toggle" aria-expanded="false" aria-controls="procP4">
+                <svg class="step__chev" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="sr-only" data-i18n="proc.toggle">Mostrar detalle</span>
+              </button>
+            </div>
             <p data-i18n="proc.s4d">Revisión de KPIs contra plan, reasignación de presupuesto y nutrición de leads hacia ventas.</p>
+            <div class="step__detail" id="procP4" hidden>
+              <p data-i18n="proc.s4x">El ciclo se cierra con lectura crítica de los KPIs contra el plan original, no contra el desempeño del mes anterior. De ahí se reasigna presupuesto, se ajustan mensajes y se nutre la relación entre marketing y ventas. Esta disciplina de revisión constante es lo que distingue una operación que ejecuta de una que dirige.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -500,11 +577,12 @@
         <h2 data-i18n="cert.h2">Certificaciones</h2>
       </div>
       <div class="certs">
-        <div class="cert"><h3>Google</h3><p>Google Ads · Google Analytics 4</p></div>
-        <div class="cert"><h3>HubSpot</h3><p>CRM · Inbound Marketing</p></div>
-        <div class="cert"><h3>Semrush</h3><p>SEO · Content Marketing</p></div>
-        <div class="cert"><h3>Asana</h3><p>Workflow Specialist</p></div>
-        <div class="cert"><h3 data-i18n="cert.g5t">Inteligencia Artificial</h3><p>Google AI Essentials · Prompt Engineering</p></div>
+        <div class="cert"><h3>Google Digital Academy</h3><p>Certificación de Google Ads · Certificación de Google Analytics (GA4)</p></div>
+        <div class="cert"><h3>HubSpot Academy</h3><p>Inbound Marketing · Certificación de Email Marketing</p></div>
+        <div class="cert"><h3>Semrush</h3><p>GA4 para SEO</p></div>
+        <div class="cert"><h3>Santander Open Academy</h3><p>Domina la IA con Gemini</p></div>
+        <div class="cert"><h3>Platzi</h3><p>Automatizaciones con n8n</p></div>
+        <div class="cert"><h3>Asana</h3><p>Asana Foundations Skill Badge</p></div>
       </div>
     </div>
   </section>
@@ -517,7 +595,7 @@
         <h2 data-i18n="contact.h2">¿Hablamos de tu próximo trimestre?</h2>
         <p data-i18n="contact.body">Disponible para dirección de marketing, consultoría de growth y proyectos de Business Intelligence.</p>
         <div class="actions">
-          <a class="btn btn--primary" href="https://wa.me/525518212535?text=Hola%20Alejandro%2C%20vimos%20tu%20CV%20y%20queremos%20platicar%20contigo%20para%20que%20conozcas%20nuestra%20empresa%20y%20la%20vacante." target="_blank" rel="noopener" data-i18n="contact.email">Escríbeme por WhatsApp</a>
+          <a class="btn btn--primary" href="https://wa.me/525518212535?text=Hola%20Alejandro%2C%20vimos%20tu%20CV%20y%20queremos%20platicar%20contigo%20para%20que%20conozcas%20nuestra%20empresa%20y%20la%20vacante." target="_blank" rel="noopener" data-i18n="contact.email" data-i18n-href="contact.walink">Escríbeme por WhatsApp</a>
           <a class="btn btn--ghost" href="https://www.linkedin.com/in/holatahu/" target="_blank" rel="noopener">LinkedIn</a>
           <button type="button" class="btn btn--ghost" data-open-modal data-i18n="contact.cv">Descargar CV</button>
         </div>
@@ -541,7 +619,7 @@
       <button type="button" class="modal__close" data-close-modal aria-label="Cerrar">✕</button>
     </div>
     <p class="modal__desc" data-i18n="modal.desc">Déjame tus datos y te envío el CV por correo.</p>
-    <form id="cvForm" novalidate>
+    <form id="cvForm" novalidate autocomplete="off">
       <div class="field">
         <label for="cvNombre" data-i18n="modal.name">Nombre</label>
         <input id="cvNombre" name="nombre" type="text" autocomplete="name" required />
@@ -550,10 +628,22 @@
         <label for="cvCorreo" data-i18n="modal.email">Correo</label>
         <input id="cvCorreo" name="correo" type="email" autocomplete="email" required />
       </div>
-      <input class="hp" type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+      <div class="hp" aria-hidden="true">
+        <label for="cvContactReason">No llenes este campo</label>
+        <input id="cvContactReason" type="text" name="contact_reason" tabindex="-1" autocomplete="off" />
+      </div>
       <button type="submit" class="btn btn--primary" data-i18n="modal.send">Enviar</button>
       <p class="form-msg" id="cvMsg" role="status" aria-live="polite"></p>
     </form>
+    <div class="modal__thanks" id="cvThanks" tabindex="-1" role="status" hidden>
+      <div class="modal__thanks-badge" aria-hidden="true">✓</div>
+      <h2 data-i18n="thanks.title">¡Listo!</h2>
+      <p data-i18n="thanks.body">Te mandé mi CV a tu correo.</p>
+      <a class="btn btn--primary" id="cvThanksWa"
+         href="https://wa.me/525518212535?text=Hola%20Alejandro%2C%20vi%20que%20ya%20me%20mandaste%20tu%20CV%20por%20correo.%20Me%20gustar%C3%ADa%20platicar%20contigo%20sobre%20la%20vacante%2C%20%C2%BFme%20lo%20compartes%20tambi%C3%A9n%20por%20aqu%C3%AD%3F"
+         target="_blank" rel="noopener"
+         data-i18n="thanks.wa" data-i18n-href="thanks.walink">Contáctame por WhatsApp</a>
+    </div>
   </div>
 </dialog>
 
@@ -583,6 +673,7 @@
       "sum.f3t": "Dato", "sum.f3d": "Business Intelligence como columna vertebral de cada decisión comercial.",
       "cases.kicker": "02 — Resultados", "cases.h2": "Casos",
       "cases.intro": "Tres proyectos, un mismo patrón: reto → estrategia → resultado. Cifras y clientes anonimizados.",
+      "cases.viewcase": "Ver caso y evidencia",
       "lbl.challenge": "Reto", "lbl.strategy": "Estrategia", "lbl.result": "Resultado",
       "case1.tag": "Institución educativa · multi-sede", "case1.title": "Ecosistema comercial completo",
       "case1.challenge": "Fricción entre marketing y ventas y procesos no estandarizados entre sedes.",
@@ -598,14 +689,20 @@
       "case3.result": "+40% de tráfico orgánico y una base de datos sólida para decisiones estratégicas.",
       "proc.kicker": "03 — Método", "proc.h2": "Proceso estratégico",
       "proc.intro": "De la visión anual al detalle táctico, sin perder el control del dato en ningún punto del embudo.",
+      "proc.toggle": "Mostrar detalle",
       "proc.s1t": "Visión anual", "proc.s1d": "Objetivos de negocio traducidos a un plan de marketing con metas por trimestre.",
+      "proc.s1x": "Toda estrategia comercial parte de traducir un objetivo de negocio en metas de marketing medibles, no al revés. Antes de definir tácticas, alineo el plan anual con el ciclo comercial de la organización: estacionalidad, capacidad instalada y objetivos de ingreso por trimestre. Esto evita el error más común en dirección de marketing — construir campañas antes de tener claridad sobre qué resultado de negocio están sosteniendo.",
       "proc.s2t": "KPIs y medición", "proc.s2d": "Definición de métricas, arquitectura de tracking (GA4, GTM, CRM) y tableros antes de invertir un peso.",
+      "proc.s2x": "Ninguna inversión se aprueba sin arquitectura de medición lista. Defino la jerarquía de métricas (negocio → marketing → canal) y construyo la infraestructura de tracking —GA4, GTM, CRM— antes de que se ejecute el primer peso de pauta. Esto convierte cada decisión posterior en una decisión basada en inteligencia comercial real, no en supuestos ni en el desempeño aislado de un canal.",
       "proc.s3t": "Ejecución en canal", "proc.s3d": "Pauta, SEO, automatización y contenido operados y optimizados semana a semana.",
+      "proc.s3x": "La ejecución multicanal (pauta, SEO, automatización, contenido) se opera bajo un mismo estándar de gobernanza: mismos objetivos, mismas ventanas de optimización, mismo criterio de asignación de presupuesto. Esto es lo que permite escalar sin perder eficiencia — cada canal compite por presupuesto según su contribución real al embudo, no por inercia histórica.",
       "proc.s4t": "Lectura y ajuste", "proc.s4d": "Revisión de KPIs contra plan, reasignación de presupuesto y nutrición de leads hacia ventas.",
+      "proc.s4x": "El ciclo se cierra con lectura crítica de los KPIs contra el plan original, no contra el desempeño del mes anterior. De ahí se reasigna presupuesto, se ajustan mensajes y se nutre la relación entre marketing y ventas. Esta disciplina de revisión constante es lo que distingue una operación que ejecuta de una que dirige.",
       "cert.kicker": "04 — Respaldo", "cert.h2": "Certificaciones", "cert.g5t": "Inteligencia Artificial",
       "contact.kicker": "05 — Contacto", "contact.h2": "¿Hablamos de tu próximo trimestre?",
       "contact.body": "Disponible para dirección de marketing, consultoría de growth y proyectos de Business Intelligence.",
       "contact.email": "Escríbeme por WhatsApp", "contact.cv": "Descargar CV",
+      "contact.walink": "https://wa.me/525518212535?text=Hola%20Alejandro%2C%20vimos%20tu%20CV%20y%20queremos%20platicar%20contigo%20para%20que%20conozcas%20nuestra%20empresa%20y%20la%20vacante.",
       "footer.tag": "Hecho con datos, no con suposiciones.",
       "modal.title": "Descargar CV", "modal.desc": "Déjame tus datos y te envío el CV por correo.",
       "modal.name": "Nombre", "modal.email": "Correo", "modal.send": "Enviar",
@@ -613,6 +710,10 @@
       "modal.success": "Revisa tu correo, ahí va tu copia.",
       "modal.error": "Algo falló. Escríbeme por WhatsApp al 55 1821 2535.",
       "modal.invalid": "Completa tu nombre y un correo válido.",
+      "thanks.title": "¡Listo!",
+      "thanks.body": "Te mandé mi CV a tu correo.",
+      "thanks.wa": "Contáctame por WhatsApp",
+      "thanks.walink": "https://wa.me/525518212535?text=Hola%20Alejandro%2C%20vi%20que%20ya%20me%20mandaste%20tu%20CV%20por%20correo.%20Me%20gustar%C3%ADa%20platicar%20contigo%20sobre%20la%20vacante%2C%20%C2%BFme%20lo%20compartes%20tambi%C3%A9n%20por%20aqu%C3%AD%3F",
       "doc.title": "Alejandro Zavala Alegría — Estrategia y ejecución"
     },
     en: {
@@ -633,6 +734,7 @@
       "sum.f3t": "Data", "sum.f3d": "Business Intelligence as the backbone of every commercial decision.",
       "cases.kicker": "02 — Results", "cases.h2": "Case studies",
       "cases.intro": "Three projects, one pattern: challenge → strategy → result. Figures and clients anonymized.",
+      "cases.viewcase": "View case & evidence",
       "lbl.challenge": "Challenge", "lbl.strategy": "Strategy", "lbl.result": "Result",
       "case1.tag": "Education institution · multi-campus", "case1.title": "End-to-end commercial ecosystem",
       "case1.challenge": "Friction between marketing and sales, with non-standardized processes across campuses.",
@@ -648,14 +750,20 @@
       "case3.result": "+40% organic traffic and a solid data foundation for strategic decisions.",
       "proc.kicker": "03 — Method", "proc.h2": "Strategic process",
       "proc.intro": "From annual vision to tactical detail, without losing control of the data at any point in the funnel.",
+      "proc.toggle": "Show detail",
       "proc.s1t": "Annual vision", "proc.s1d": "Business goals translated into a marketing plan with quarterly targets.",
+      "proc.s1x": "Every commercial strategy starts by translating a business objective into measurable marketing goals, not the other way around. Before defining tactics, I align the annual plan with the organization's commercial cycle: seasonality, installed capacity and revenue targets per quarter. This avoids the most common mistake in marketing leadership — building campaigns before being clear on which business result they are meant to sustain.",
       "proc.s2t": "KPIs & measurement", "proc.s2d": "Metric definition, tracking architecture (GA4, GTM, CRM) and dashboards before any spend.",
+      "proc.s2x": "No investment is approved without the measurement architecture ready. I define the metric hierarchy (business → marketing → channel) and build the tracking infrastructure — GA4, GTM, CRM — before the first unit of media spend runs. This turns every later decision into one based on real commercial intelligence, not assumptions or the isolated performance of a single channel.",
       "proc.s3t": "Channel execution", "proc.s3d": "Paid media, SEO, automation and content run and optimized week to week.",
+      "proc.s3x": "Multichannel execution (paid media, SEO, automation, content) runs under a single governance standard: same objectives, same optimization windows, same budget-allocation criteria. This is what makes it possible to scale without losing efficiency — each channel competes for budget based on its real contribution to the funnel, not on historical inertia.",
       "proc.s4t": "Read & adjust", "proc.s4d": "KPI review against plan, budget reallocation and lead nurturing into sales.",
+      "proc.s4x": "The cycle closes with a critical reading of KPIs against the original plan, not against the previous month's performance. From there, budget is reallocated, messaging is adjusted and the relationship between marketing and sales is nurtured. This discipline of constant review is what separates an operation that executes from one that leads.",
       "cert.kicker": "04 — Credentials", "cert.h2": "Certifications", "cert.g5t": "Artificial Intelligence",
       "contact.kicker": "05 — Contact", "contact.h2": "Let's talk about your next quarter.",
       "contact.body": "Available for marketing leadership, growth consulting and Business Intelligence projects.",
       "contact.email": "Message me on WhatsApp", "contact.cv": "Download CV",
+      "contact.walink": "https://wa.me/525518212535?text=Hi%20Alejandro%2C%20we%20saw%20your%20resume%20and%20would%20like%20to%20talk%20with%20you%20to%20introduce%20you%20to%20our%20company%20and%20the%20role.",
       "footer.tag": "Built on data, not assumptions.",
       "modal.title": "Download CV", "modal.desc": "Leave your details and I'll email you the CV.",
       "modal.name": "Name", "modal.email": "Email", "modal.send": "Send",
@@ -663,6 +771,10 @@
       "modal.success": "Check your inbox — your copy is on its way.",
       "modal.error": "Something went wrong. Message me on WhatsApp at +52 55 1821 2535.",
       "modal.invalid": "Enter your name and a valid email.",
+      "thanks.title": "You're all set!",
+      "thanks.body": "I've sent my CV to your email.",
+      "thanks.wa": "Message me on WhatsApp",
+      "thanks.walink": "https://wa.me/525518212535?text=Hi%20Alejandro%2C%20I%20saw%20you%20already%20sent%20your%20CV%20to%20my%20email.%20I%27d%20like%20to%20talk%20about%20the%20role%20%E2%80%94%20could%20you%20also%20share%20it%20here%3F",
       "doc.title": "Alejandro Zavala Alegría — Strategy & execution"
     }
   };
@@ -679,6 +791,10 @@
       var key = el.getAttribute("data-i18n");
       if (dict[key] != null) el.textContent = dict[key];
     });
+    document.querySelectorAll("[data-i18n-href]").forEach(function (el) {
+      var key = el.getAttribute("data-i18n-href");
+      if (dict[key] != null) el.setAttribute("href", dict[key]);
+    });
     document.querySelectorAll(".lang button").forEach(function (b) {
       b.setAttribute("aria-pressed", String(b.dataset.lang === lang));
     });
@@ -690,16 +806,45 @@
   });
   applyLang(lang);
 
+  /* ---------- Acordeón del proceso ---------- */
+  document.querySelectorAll(".step__toggle").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var panel = document.getElementById(btn.getAttribute("aria-controls"));
+      var open = btn.getAttribute("aria-expanded") === "true";
+      btn.setAttribute("aria-expanded", String(!open));
+      if (panel) panel.hidden = open;
+    });
+  });
+
   /* ---------- Modal ---------- */
   var modal = document.getElementById("cvModal");
   var form = document.getElementById("cvForm");
   var msg = document.getElementById("cvMsg");
+  var thanks = document.getElementById("cvThanks");
+  var modalTitle = document.getElementById("cvModalTitle");
+  var modalDesc = document.querySelector(".modal__desc");
   var lastFocus = null;
+
+  function showThanks() {
+    form.reset();
+    form.hidden = true;
+    if (modalDesc) modalDesc.hidden = true;
+    if (modalTitle) modalTitle.hidden = true;
+    thanks.hidden = false;
+    if (thanks.focus) thanks.focus();
+  }
+  function resetModalView() {
+    thanks.hidden = true;
+    form.hidden = false;
+    if (modalDesc) modalDesc.hidden = false;
+    if (modalTitle) modalTitle.hidden = false;
+  }
 
   function openModal() {
     lastFocus = document.activeElement;
     msg.className = "form-msg";
     msg.textContent = "";
+    resetModalView();
     if (typeof modal.showModal === "function") modal.showModal();
     else modal.setAttribute("open", "");
     var f = document.getElementById("cvNombre");
@@ -736,10 +881,10 @@
       msg.textContent = dict["modal.invalid"];
       return;
     }
-    if (form._hp.value) { // honeypot: silently accept
-      msg.className = "form-msg form-msg--ok";
-      msg.textContent = dict["modal.success"];
-      form.reset();
+    var hp = form.elements["contact_reason"];
+    if (hp && hp.value.trim()) { // honeypot tripped: likely a bot, drop silently
+      console.log("CV form: honeypot filled, skipping send", JSON.stringify(hp.value)); // TEMP: remove after debugging
+      showThanks();
       return;
     }
 
@@ -748,16 +893,16 @@
     btn.textContent = dict["modal.sending"];
 
     var body = new URLSearchParams({ nombre: nombre, correo: correo });
+    console.log("CV form: POST ->", ENDPOINT, body.toString()); // TEMP: remove after debugging
     fetch(ENDPOINT, {
       method: "POST",
       mode: "no-cors",
       headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
       body: body.toString()
     }).then(function () {
-      msg.className = "form-msg form-msg--ok";
-      msg.textContent = dict["modal.success"];
-      form.reset();
-    }).catch(function () {
+      showThanks();
+    }).catch(function (err) {
+      console.log("CV form: fetch error", err); // TEMP: remove after debugging
       msg.className = "form-msg form-msg--err";
       msg.textContent = dict["modal.error"];
     }).finally(function () {
