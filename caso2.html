@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Caso 02 — Performance media a escala · Alejandro Zavala Alegría</title>
-<meta name="description" content="Caso anonimizado: operación y optimización de pauta en Meta, Google y TikTok Ads con presupuestos de seis cifras mensuales. ROAS sostenido por encima de 2.5x." />
+<title>Caso 02 — Performance media multiplataforma · Alejandro Zavala Alegría</title>
+<meta name="description" content="Caso anonimizado: consolidación de tráfico orgánico y pagado de Bing, Google, Meta y LinkedIn Ads en un panel único. Costo por clic reducido de $0.79 a $0.40 con impresiones y clics casi duplicados." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" />
@@ -96,48 +96,18 @@
   .section__head { max-width: 52ch; margin-bottom: clamp(1.75rem, 4vw, 2.5rem); }
   .section__head h2 { font-size: clamp(1.6rem, 3.4vw, 2.2rem); margin-top: .6rem; }
   .section__head p { margin-top: .8rem; color: var(--muted); font-size: .96rem; }
+  .fine-print { margin: 0; color: var(--muted); font-size: .75rem; font-weight: 400; line-height: 1.55; }
 
-  /* Dashboard mockup (estilo Looker Studio) */
-  .dash { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--surface); box-shadow: var(--shadow-sm); }
-  .dash__bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding: .85rem 1.1rem; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 45%, var(--surface)); }
-  .dash__title { font-family: var(--font-mono); font-size: .78rem; color: var(--muted); }
-  .dash__title b { color: var(--ink); font-weight: 600; }
-  .dash__chip { font-family: var(--font-mono); font-size: .7rem; color: var(--data); border: 1px solid color-mix(in srgb, var(--data) 40%, transparent); border-radius: 999px; padding: .2em .7em; }
-  .dash__body { padding: clamp(1rem, 3vw, 1.5rem); display: grid; gap: 1.25rem; background: color-mix(in srgb, var(--paper) 55%, var(--surface)); }
-
-  .scorecards { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
-  .scorecard { background: var(--surface); padding: 1rem 1.1rem; }
-  .scorecard .sc-num { font-family: var(--font-display); font-weight: 800; font-size: 1.6rem; letter-spacing: -.03em; line-height: 1.05; }
-  .scorecard .sc-lbl { font-family: var(--font-mono); font-size: .72rem; color: var(--muted); margin-top: .3rem; }
-  .scorecard .sc-sub { font-family: var(--font-mono); font-size: .68rem; color: var(--data); margin-top: .2rem; }
-
+  .evidence { display: grid; gap: 1.5rem; }
   .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: clamp(1.1rem, 3vw, 1.6rem); }
-  .panel h3 { font-size: 1rem; }
   .panel .p-note { margin-top: .4rem; font-family: var(--font-mono); font-size: .73rem; color: var(--muted); line-height: 1.55; }
-  .panel-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
-  @media (min-width: 780px) { .panel-grid { grid-template-columns: 1.4fr 1fr; } }
+  .panel-img { display: block; width: 100%; height: auto; border-radius: 8px; }
 
-  .cx-grid { stroke: var(--line); stroke-width: 1; }
-  .cx-axis { stroke: var(--line); stroke-width: 1.5; }
-  .cx-label { fill: var(--muted); font: 600 11px var(--font-mono); }
-  .cx-val { fill: var(--ink); font: 700 13px var(--font-display); }
-  .cx-cap { fill: var(--data); font: 600 12px var(--font-mono); }
-
-  .ln-area { fill: color-mix(in srgb, var(--data) 15%, transparent); }
-  .ln-path { fill: none; stroke: var(--data); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
-  .ln-dot { fill: var(--accent); stroke: var(--paper); stroke-width: 1.5; }
-  .ln-threshold { stroke: var(--ink); stroke-width: 1.4; stroke-dasharray: 5 4; opacity: .55; }
-
-  .hbar { transform-box: fill-box; transform-origin: left; }
-  .hbar--eq { fill: color-mix(in srgb, var(--muted) 42%, transparent); }
-  .hbar--got { fill: var(--accent); }
-  @media (prefers-reduced-motion: no-preference) {
-    .hbar { animation: growx 1s cubic-bezier(.2,.7,.2,1) both; }
-    .hbar--got { animation-delay: .12s; }
-    @keyframes growx { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-    .ln-path { stroke-dasharray: 1400; stroke-dashoffset: 1400; animation: draw 1.6s ease forwards .1s; }
-    @keyframes draw { to { stroke-dashoffset: 0; } }
-  }
+  .case-note { display: grid; gap: clamp(1.25rem, 3vw, 2rem); align-items: stretch; }
+  @media (min-width: 720px) { .case-note { grid-template-columns: 40fr 60fr; } }
+  .case-note__photo { aspect-ratio: 4 / 5; min-height: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 8px; }
+  .case-note__body p { margin: 0 0 1rem; color: var(--muted); line-height: 1.7; }
+  .case-note__body p:last-child { margin-bottom: 0; }
 
   .footer { border-top: 1px solid var(--line); padding-block: 2.5rem; margin-top: 1rem; }
   .footer__inner { display: flex; flex-wrap: wrap; gap: .75rem 2rem; justify-content: space-between; font-size: .85rem; color: var(--muted); font-family: var(--font-mono); }
@@ -162,121 +132,40 @@
 <main>
   <section class="wrap case-head">
     <p class="eyebrow">Caso 02 — Resultados</p>
-    <p class="case-head__tag">Retail / educación</p>
-    <h1>Performance media a escala</h1>
+    <p class="case-head__tag">Bing · Google · Meta · LinkedIn Ads</p>
+    <h1>Performance media multiplataforma</h1>
     <dl class="summary">
-      <div class="summary__row"><dt>Reto</dt><dd>Optimizar la inversión en pauta multiplataforma sin perder eficiencia.</dd></div>
-      <div class="summary__row"><dt>Estrategia</dt><dd>Operación y optimización continua en Meta, Google y TikTok Ads, administrando presupuestos de seis cifras mensuales.</dd></div>
-      <div class="summary__row summary__row--result"><dt>Resultado</dt><dd>ROAS sostenido por encima de 2.5x y mejor eficiencia en el top of funnel.</dd></div>
+      <div class="summary__row"><dt>Reto</dt><dd>Optimizar la inversión repartida entre Bing, Google, Meta y LinkedIn Ads sin una lectura consolidada del rendimiento entre plataformas.</dd></div>
+      <div class="summary__row"><dt>Estrategia</dt><dd>Consolidación de tráfico orgánico y pagado en un panel único, con seguimiento mensual de costo por clic, impresiones y clics por plataforma.</dd></div>
+      <div class="summary__row summary__row--result"><dt>Resultado</dt><dd>Costo por clic reducido de $0.79 a $0.40 mientras impresiones y clics casi se duplicaron, manteniendo el CTR estable.</dd></div>
     </dl>
   </section>
 
   <section class="section">
     <div class="wrap">
       <div class="section__head">
-        <p class="eyebrow">Evidencia</p>
-        <h2>Panel de performance media</h2>
-        <p>Mockup de tablero ejecutivo con los datos ya anonimizados del caso. Las series mensuales son una representación esquemática del resultado reportado (ROAS &gt; 2.5x sostenido); no reflejan cifras exactas del cliente.</p>
+        <p class="fine-print">Todas las cifras provienen del panel de Looker Studio del proyecto, anonimizadas y sin nombre de cliente.</p>
       </div>
 
-      <div class="dash">
-        <div class="dash__bar">
-          <span class="dash__title"><b>Performance media</b> · cuenta anonimizada</span>
-          <span class="dash__chip">Vista: 12 meses</span>
+      <div class="evidence">
+        <div class="panel">
+          <img class="panel-img" src="looker.jpg" alt="Panel de performance media con tráfico y pauta consolidados de Bing, Google, Meta y LinkedIn Ads" />
+          <p class="p-note">Panel de performance media: tráfico y pauta consolidados en Bing, Google, Meta y LinkedIn Ads.</p>
         </div>
-        <div class="dash__body">
 
-          <div class="scorecards">
-            <div class="scorecard">
-              <div class="sc-num">2.5x+</div>
-              <div class="sc-lbl">ROAS</div>
-              <div class="sc-sub">sostenido sobre el umbral</div>
-            </div>
-            <div class="scorecard">
-              <div class="sc-num">3</div>
-              <div class="sc-lbl">Plataformas activas</div>
-              <div class="sc-sub">Meta · Google · TikTok Ads</div>
-            </div>
-            <div class="scorecard">
-              <div class="sc-num">6 cifras</div>
-              <div class="sc-lbl">Presupuesto / mes</div>
-              <div class="sc-sub">gestionado y optimizado</div>
-            </div>
-            <div class="scorecard">
-              <div class="sc-num">&uarr;</div>
-              <div class="sc-lbl">Top of funnel</div>
-              <div class="sc-sub">mejor eficiencia</div>
-            </div>
+        <div class="panel case-note">
+          <img class="case-note__photo" src="qwqwqw.jpg" alt="Retrato de trabajo" />
+          <div class="case-note__body">
+            <p>El reto era optimizar la inversión repartida entre Bing, Google, Meta y LinkedIn Ads sin perder eficiencia al escalar: cada plataforma reporta por separado, y sin una lectura consolidada era imposible saber en tiempo real dónde rendía mejor cada peso invertido.</p>
+            <p>La solución fue un panel único que junta tráfico orgánico y pagado en la misma vista. El resultado, mes a mes: el costo por clic bajó de $0.79 a $0.40 mientras impresiones y clics casi se duplicaron (de 524.6K a 855.9K impresiones, de 5.7K a 10.1K clics), manteniendo el CTR estable alrededor de 1%. Traducido a negocio: más volumen, gastando menos por resultado.</p>
+            <p>Con esa lectura consolidada, las decisiones de presupuesto se tomaron sobre datos comparables entre plataformas —no sobre reportes aislados que no se podían cruzar— y cada peso se movió hacia donde mejor rendía.</p>
           </div>
-
-          <div class="panel-grid">
-            <div class="panel">
-              <h3>ROAS mensual vs. umbral 2.5x</h3>
-              <p class="p-note">Representación esquemática — cada punto se mantiene por encima de 2.5x durante los 12 meses.</p>
-              <svg viewBox="0 0 520 260" role="img" aria-label="Línea de ROAS mensual que permanece por encima del umbral de 2.5x durante los doce meses.">
-                <line class="cx-grid" x1="44" y1="183.4" x2="500" y2="183.4" />
-                <line class="cx-grid" x1="44" y1="50.6"  x2="500" y2="50.6" />
-                <line class="cx-axis" x1="44" y1="210"   x2="500" y2="210" />
-                <text class="cx-label" x="40" y="187" text-anchor="end">2.0x</text>
-                <text class="cx-label" x="40" y="121" text-anchor="end">2.5x</text>
-                <text class="cx-label" x="40" y="54"  text-anchor="end">3.0x</text>
-
-                <line class="ln-threshold" x1="44" y1="117" x2="500" y2="117" />
-                <text class="cx-label" x="500" y="112" text-anchor="end">umbral 2.5x</text>
-
-                <polygon class="ln-area" points="60,103.7 99.1,90.4 138.2,110.4 177.3,77.1 216.4,83.8 255.5,63.9 294.5,97.1 333.6,70.5 372.7,77.1 411.8,57.2 450.9,63.9 490,70.5 490,210 60,210" />
-                <polyline class="ln-path" points="60,103.7 99.1,90.4 138.2,110.4 177.3,77.1 216.4,83.8 255.5,63.9 294.5,97.1 333.6,70.5 372.7,77.1 411.8,57.2 450.9,63.9 490,70.5" />
-                <g>
-                  <circle class="ln-dot" cx="60"    cy="103.7" r="3.2" />
-                  <circle class="ln-dot" cx="99.1"  cy="90.4"  r="3.2" />
-                  <circle class="ln-dot" cx="138.2" cy="110.4" r="3.2" />
-                  <circle class="ln-dot" cx="177.3" cy="77.1"  r="3.2" />
-                  <circle class="ln-dot" cx="216.4" cy="83.8"  r="3.2" />
-                  <circle class="ln-dot" cx="255.5" cy="63.9"  r="3.2" />
-                  <circle class="ln-dot" cx="294.5" cy="97.1"  r="3.2" />
-                  <circle class="ln-dot" cx="333.6" cy="70.5"  r="3.2" />
-                  <circle class="ln-dot" cx="372.7" cy="77.1"  r="3.2" />
-                  <circle class="ln-dot" cx="411.8" cy="57.2"  r="3.2" />
-                  <circle class="ln-dot" cx="450.9" cy="63.9"  r="3.2" />
-                  <circle class="ln-dot" cx="490"   cy="70.5"  r="3.2" />
-                </g>
-                <text class="cx-label" x="60"    y="228" text-anchor="middle">M1</text>
-                <text class="cx-label" x="255.5" y="228" text-anchor="middle">M6</text>
-                <text class="cx-label" x="490"   y="228" text-anchor="middle">M12</text>
-                <text class="cx-cap" x="272" y="248" text-anchor="middle">12 / 12 meses por encima de 2.5x</text>
-              </svg>
-            </div>
-
-            <div class="panel">
-              <h3>ROAS: equilibrio vs. logrado</h3>
-              <p class="p-note">El punto de equilibrio (1.0x) es una referencia fija; la barra "logrado" refleja el resultado reportado.</p>
-              <svg viewBox="0 0 520 170" role="img" aria-label="Barras horizontales: punto de equilibrio 1.0x frente a ROAS logrado de 2.5x o más.">
-                <line class="cx-grid" x1="250" y1="18" x2="250" y2="122" />
-                <line class="cx-grid" x1="370" y1="18" x2="370" y2="122" />
-                <line class="cx-grid" x1="490" y1="18" x2="490" y2="122" />
-                <line class="cx-axis" x1="130" y1="18" x2="130" y2="122" />
-                <text class="cx-label" x="130" y="138" text-anchor="middle">0x</text>
-                <text class="cx-label" x="250" y="138" text-anchor="middle">1x</text>
-                <text class="cx-label" x="370" y="138" text-anchor="middle">2x</text>
-                <text class="cx-label" x="490" y="138" text-anchor="middle">3x</text>
-
-                <text class="cx-label" x="130" y="26"  text-anchor="start">Punto de equilibrio</text>
-                <rect class="hbar hbar--eq"  x="130" y="32" width="120" height="28" rx="3" />
-                <text class="cx-val" x="258" y="51"  text-anchor="start">1.0x</text>
-
-                <text class="cx-label" x="130" y="80"  text-anchor="start">Logrado</text>
-                <rect class="hbar hbar--got" x="130" y="86" width="300" height="28" rx="3" />
-                <text class="cx-val" x="438" y="105" text-anchor="start">2.5x+</text>
-              </svg>
-            </div>
-          </div>
-
         </div>
+
+        <p style="margin-top:1rem;">
+          <a class="btn btn--primary" href="index.html#casos">&larr;&nbsp;Volver a los casos</a>
+        </p>
       </div>
-
-      <p style="margin-top:2rem;">
-        <a class="btn btn--primary" href="index.html#casos">&larr;&nbsp;Volver a los casos</a>
-      </p>
     </div>
   </section>
 </main>

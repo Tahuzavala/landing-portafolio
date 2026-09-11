@@ -96,11 +96,21 @@
   .section__head { max-width: 52ch; margin-bottom: clamp(1.75rem, 4vw, 2.5rem); }
   .section__head h2 { font-size: clamp(1.6rem, 3.4vw, 2.2rem); margin-top: .6rem; }
   .section__head p { margin-top: .8rem; color: var(--muted); font-size: .96rem; }
+  .fine-print { margin: 0; color: var(--muted); font-size: .75rem; font-weight: 400; line-height: 1.55; }
 
   .evidence { display: grid; gap: 1.5rem; }
   .chart-card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: clamp(1.25rem, 3vw, 2rem); }
   .chart-card h3 { font-size: 1.05rem; }
   .chart-card .cc-note { margin-top: .45rem; font-family: var(--font-mono); font-size: .74rem; color: var(--muted); line-height: 1.55; }
+  .chart-img { display: block; width: 100%; height: auto; border-radius: 8px; }
+  .photo-placeholder { display: flex; align-items: center; justify-content: center; min-height: 220px; border: 2px dashed var(--line); border-radius: 8px; color: var(--muted); font-family: var(--font-mono); font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; }
+
+  .case-note { display: grid; gap: clamp(1.25rem, 3vw, 2rem); align-items: stretch; }
+  @media (min-width: 720px) { .case-note { grid-template-columns: 40fr 60fr; } }
+  .case-note__photo { aspect-ratio: 4 / 5; min-height: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 8px; }
+  .case-note__body p { margin: 0 0 1rem; color: var(--muted); line-height: 1.7; }
+  .case-note__body p:last-child { margin-bottom: 0; }
+  .case-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2rem; }
   .chart-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; margin-top: 1.4rem; }
   .chart-wrap { margin-top: 1.25rem; }
 
@@ -161,61 +171,20 @@
   <section class="section">
     <div class="wrap">
       <div class="section__head">
-        <p class="eyebrow">Evidencia</p>
-        <h2>El resultado, en gráfica</h2>
-        <p>Datos anonimizados y expresados como índice (base 100 = punto de partida). Sin cifras absolutas ni nombres de cliente.</p>
+        <p class="fine-print">Los resultados que obtuvo la estrategia se han anonimizado y expresados como índice base 100. Sin cifras absolutas ni nombres de cliente.</p>
       </div>
 
       <div class="evidence">
-        <div class="chart-grid">
-          <div class="chart-card">
-            <h3>Costo por lead (CPL)</h3>
-            <p class="cc-note">Índice base 100 · año contra año</p>
-            <div class="chart-wrap">
-              <svg viewBox="0 0 340 250" role="img" aria-label="Barras: CPL cae de 100 a un rango de 80 a 85, una reducción de 15 a 20 por ciento.">
-                <line class="cx-grid" x1="40" y1="138.8" x2="320" y2="138.8" />
-                <line class="cx-grid" x1="40" y1="67.7"  x2="320" y2="67.7" />
-                <line class="cx-axis" x1="40" y1="210"   x2="320" y2="210" />
-                <text class="cx-label" x="34" y="213" text-anchor="end">0</text>
-                <text class="cx-label" x="34" y="142"  text-anchor="end">50</text>
-                <text class="cx-label" x="34" y="71"   text-anchor="end">100</text>
+        <div class="chart-card">
+          <img class="chart-img" src="n8ncaso1.jpg" alt="Automatización construida: nutrición y scoring de leads con IA" />
+          <p class="cc-note">Automatización construida: nutrición y scoring de leads con IA.</p>
+        </div>
 
-                <rect class="bar bar--before" x="73"  y="67.7" width="74" height="142.3" rx="3" />
-                <rect class="bar bar--after"  x="198" y="93.3" width="74" height="116.7" rx="3" />
-                <line class="cx-range" x1="198" y1="96.2" x2="272" y2="96.2" />
-                <line class="cx-range" x1="198" y1="89.1" x2="272" y2="89.1" />
-
-                <text class="cx-val" x="110" y="59"  text-anchor="middle">100</text>
-                <text class="cx-val" x="235" y="82"  text-anchor="middle">80–85</text>
-                <text class="cx-label" x="110" y="228" text-anchor="middle">Antes</text>
-                <text class="cx-label" x="235" y="228" text-anchor="middle">Después</text>
-                <text class="cx-cap" x="180" y="245" text-anchor="middle">−15 % a −20 % en CPL</text>
-              </svg>
-            </div>
-          </div>
-
-          <div class="chart-card">
-            <h3>Leads calificados</h3>
-            <p class="cc-note">Índice base 100 · año contra año</p>
-            <div class="chart-wrap">
-              <svg viewBox="0 0 340 250" role="img" aria-label="Barras: leads calificados suben de 100 a aproximadamente 120, cerca de 20 por ciento más.">
-                <line class="cx-grid" x1="40" y1="138.8" x2="320" y2="138.8" />
-                <line class="cx-grid" x1="40" y1="67.7"  x2="320" y2="67.7" />
-                <line class="cx-axis" x1="40" y1="210"   x2="320" y2="210" />
-                <text class="cx-label" x="34" y="213" text-anchor="end">0</text>
-                <text class="cx-label" x="34" y="142"  text-anchor="end">50</text>
-                <text class="cx-label" x="34" y="71"   text-anchor="end">100</text>
-
-                <rect class="bar bar--before" x="73"  y="67.7" width="74" height="142.3" rx="3" />
-                <rect class="bar bar--after"  x="198" y="39.2" width="74" height="170.8" rx="3" />
-
-                <text class="cx-val" x="110" y="59"  text-anchor="middle">100</text>
-                <text class="cx-val" x="235" y="31"  text-anchor="middle">≈ 120</text>
-                <text class="cx-label" x="110" y="228" text-anchor="middle">Antes</text>
-                <text class="cx-label" x="235" y="228" text-anchor="middle">Después</text>
-                <text class="cx-cap" x="180" y="245" text-anchor="middle">≈ +20 % leads calificados</text>
-              </svg>
-            </div>
+        <div class="chart-card case-note">
+          <img class="case-note__photo" src="Candid Office Portrait.jpg" alt="Retrato de trabajo en oficina" />
+          <div class="case-note__body">
+            <p>Marketing y ventas trabajaban por separado: marketing entregaba volumen de contactos y cada sede los procesaba a su manera, sin un criterio común para decidir qué lead estaba listo para contactar. El resultado eran oportunidades que se enfriaban, retrabajo y discusiones sobre la calidad de la demanda en lugar de sobre cómo cerrarla.</p>
+            <p>La infraestructura MarTech —CRM como registro único, automatización para enrutar y nutrir, e IA para el scoring— atacó ese problema de raíz: hoy cada lead entra por un tracking unificado, se califica con la misma lógica en todas las sedes y llega a ventas con contexto completo y un SLA de contacto. El impacto medible: un CPL entre 15% y 20% más bajo y alrededor de 20% más leads calificados año contra año.</p>
           </div>
         </div>
 
@@ -234,11 +203,12 @@
             <div class="flow__node"><b>05 · Ventas</b><span>Handoff con contexto completo y SLA de contacto.</span></div>
           </div>
         </div>
-      </div>
 
-      <p style="margin-top:2rem;">
-        <a class="btn btn--primary" href="index.html#casos">&larr;&nbsp;Volver a los casos</a>
-      </p>
+        <div class="case-actions">
+          <a class="btn btn--ghost" href="index.html#casos">&larr;&nbsp;Volver a los casos</a>
+          <a class="btn btn--primary" href="https://admissions-performan-gj37.bolt.host" target="_blank" rel="noopener">Prueba la demo de ventas</a>
+        </div>
+      </div>
     </div>
   </section>
 </main>
