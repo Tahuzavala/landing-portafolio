@@ -901,7 +901,7 @@
     btn.disabled = true;
     btn.textContent = dict["modal.sending"];
 
-    var body = new URLSearchParams({ nombre: nombre, correo: correo });
+    var body = new URLSearchParams({ nombre: nombre, correo: correo, lang: lang });
     console.log("CV form: POST ->", ENDPOINT, body.toString()); // TEMP: remove after debugging
     fetch(ENDPOINT, {
       method: "POST",
